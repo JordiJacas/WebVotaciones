@@ -7,11 +7,11 @@
 </head>
 <body>
 	<div id = "inicioSession">
-		<form action = "funcions.php" method = "post">
+		<form action = "connectar.php" method = "post">
 			<label>Name: </label> <br>
 			<input type="text" name="user"/> <br> <br>
 			<label>Password: </label> <br>
-			<input type="text" name="password"/> <br>
+			<input type="password" name="password"/> <br>
 			<input class = "submit" type="submit" name="submitIniciar" value="Enviar"/>
 		</form>
 	</div>
