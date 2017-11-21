@@ -1,3 +1,11 @@
+#principal{
+	display: none;
+}
+
+nav{
+	background: cyan;
+}
+
 form {
 	position: absolute;
 	left: 40%;
