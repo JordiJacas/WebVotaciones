@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<meta charset="utf-8">
 	<title>Web Votaciones</title>
 </head>
@@ -15,20 +15,13 @@
 			<input class = "submit" type="submit" name="submitIniciar" value="Enviar"/>
 		</form>
 	</div>
-
-	<div id = "principal">
-		<nav>
-			<p><?php echo $row['nombre'] . " " . $row['apellido']; ?></p>
-			<a href="longout.php">Cerrar Session</a>
-		</nav>
-	</div>
 	<?php
 		session_start();
-		include 'connectar.php';
+		include 'php/connectar.php';
 
 		if(!isset($_SESSION['usr']) || !isset($_SESSION['password'])){
-			$_SESSION['usr'] = " ";
-			$_SESSION['password'] = " ";
+			$_SESSION['usr'] = null;
+			$_SESSION['password'] = null;
 			
 		}else{
 			$_SESSION['usr'] = $_POST['user'];
@@ -39,11 +32,12 @@
 		$row = login($pdo);
 
 		if($row['nombre'] == $_SESSION['usr']){
-			print_r($row);
-			echo "<script>
-					document.getElementById('inicioSession').style.display = 'none';
-					document.getElementById('principal').style.display = 'inline';
-				  </script>";
+			$_SESSION['row'] = $row;
+			// echo "<script>
+					// document.getElementById('inicioSession').style.display = 'none';
+					// document.getElementById('principal').style.display = 'inline';
+				  // </script>";
+			header('Location: http://localhost:8080/WebVotaciones/php/menuPrincipal.php');
 		}
 	?>
 
