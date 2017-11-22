@@ -16,19 +16,19 @@
 ?>
 	<nav>
 		<ul>
-			<li>Inicio</li>
-			<li>Perfil</li>
-			<li>Mis Consultas</li>
-			<li>Crear Consultas</li>
+			<li><a href="menuPrincipal.php" >Inicio</a></li>
+			<li><a>Perfil</a></li>
+			<li><a>Mis Consultas</a></li>
+			<li><a href="crearConsulta.php" >Crear Consultas</a></li>
 		</ul>
 		<p><?php //echo $row['nombre'] . " " . $row['apellido']; ?></p>
-		<a href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
+		<a id = "lLogout" href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
 	</nav>
 
-	<form id="myform" action="insertarConsulta.php" method="post" onsubmit="return enviar();">
+	<form id="myform" action="enviarConsulta.php" method="post" onsubmit="return enviar();">
 		<label>Escribe la consulta:</label><br>
 		<input type="textArea" name="consulta" id="consulta"><br>
-		<input type="submit" name="crearConsulta" value="Crear Consulta"style="display:none;">
+		<input type="submit" name="crearConsulta" id="crearConsulta" value=" "style="display:none;">
 	<form>
 
 	<div class = "buttons">

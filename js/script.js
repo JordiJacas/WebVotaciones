@@ -13,11 +13,11 @@ function crearOpcion(){
 	label.appendChild(textNodeLabel);
 
 	label.setAttribute('class','lOpciones');
-	label.setAttribute('id',numOpciones);
+	label.setAttribute('id','l'+numOpciones);
 	input.setAttribute('class','iOpciones');
-	input.setAttribute('id',numOpciones);
-	borrar.setAttribute('id',numOpciones);
-	borrar.setAttribute('onclick','borrarOpcion()');
+	input.setAttribute('id','i'+numOpciones);
+	borrar.setAttribute('id','b'+numOpciones);
+	borrar.setAttribute('onclick','borrarOpcion('+numOpciones+')');
 
  	var lugar = document.getElementsByTagName("form")[0].lastElement;
  	document.body.getElementsByTagName("form")[0].insertBefore(label,lugar);
@@ -27,19 +27,27 @@ function crearOpcion(){
 }
 
 function eSubmit(){
-	document.forms["crearConsulta"].submit();
+	document.getElementById('crearConsulta').value = 'Crear Consulta';
 }
+
+function borrarOpcion(id){
+	var iBorrar = document.getElementById('i'+id)
+	var bBorrar = document.getElementById('l'+id)
+	var lBorrar = document.getElementById('b'+id)
+	iBorrar.parentNode.removeChild(iBorrar);
+	bBorrar.parentNode.removeChild(bBorrar);
+	lBorrar.parentNode.removeChild(lBorrar);
+}
+
 
 function enviar(){
 	var formulario = document.getElementById("myform");	
-	var dato = formulario[0];
+	var dato = document.getElementById('crearConsulta');
  
 	if (dato.value=="Crear Consulta"){
-		alert("ola");
 		formulario.submit();
 		return true;
 	} else {
-		alert("ola2");
 		return false;
 	}
 }

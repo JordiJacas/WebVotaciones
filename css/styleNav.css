@@ -3,6 +3,11 @@ body{
 	cursor: default;
 }
 
+a{
+	text-decoration: none;
+	color: #000;
+}
+
 nav {
 	position: relative;
 	background-color: #0AB632;
@@ -42,7 +47,7 @@ nav p{
 	cursor: default;
 }
 
-nav a{
+nav #lLogout{
 	position: absolute;
 	right: 50px;
 	top: 10px;

@@ -15,10 +15,10 @@
 ?>
 	<nav>
 		<ul>
-			<li>Inicio</li>
-			<li>Perfil</li>
-			<li>Mis Consultas</li>
-			<li>Crear Consultas</li>
+			<li><a href="menuPrincipal.php" >Inicio</a></li>
+			<li><a>Perfil</a></li>
+			<li><a>Mis Consultas</a></li>
+			<li><a href="crearConsulta.php" >Crear Consultas</a></li>
 		</ul>
 		<p><?php echo $row['nombre'] . " " . $row['apellido']; ?></p>
 		<a href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
