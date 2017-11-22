@@ -24,53 +24,15 @@
 	</nav>
 		
 	<section>
-		<a href="#">
+	
 		<div  class = "consulta">
+			<a href="#">
 			<p class = "descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia velit ut dictum sodales. 
 			Sed facilisis egestas tellus, sit amet sagittis nibh lobortis mollis. Aenean ultrices arcu et tellus finibus mollis.</p>
 			<p class = "nombre"> por Admin General</p>
+			</a>
 		</div>
-		</a>
 		
-		<a href="#">
-		<div  class = "consulta">
-			<p class = "descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia velit ut dictum sodales. 
-			Sed facilisis egestas tellus, sit amet sagittis nibh lobortis mollis. Aenean ultrices arcu et tellus finibus mollis.</p>
-			<p class = "nombre"> por Admin General</p>
-		</div>
-		</a>
-		
-		<a href="#">
-		<div  class = "consulta">
-			<p class = "descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia velit ut dictum sodales. 
-			Sed facilisis egestas tellus, sit amet sagittis nibh lobortis mollis. Aenean ultrices arcu et tellus finibus mollis.</p>
-			<p class = "nombre"> por Admin General</p>
-		</div>
-		</a>
-		
-		<a href="#">
-		<div  class = "consulta">
-			<p class = "descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia velit ut dictum sodales. 
-			Sed facilisis egestas tellus, sit amet sagittis nibh lobortis mollis. Aenean ultrices arcu et tellus finibus mollis.</p>
-			<p class = "nombre"> por Admin General</p>
-		</div>
-		</a>
-		
-		<a href="#">
-		<div  class = "consulta">
-			<p class = "descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia velit ut dictum sodales. 
-			Sed facilisis egestas tellus, sit amet sagittis nibh lobortis mollis. Aenean ultrices arcu et tellus finibus mollis.</p>
-			<p class = "nombre"> por Admin General</p>
-		</div>
-		</a>
-		
-		<a href="#">
-		<div  class = "consulta">
-			<p class = "descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia velit ut dictum sodales. 
-			Sed facilisis egestas tellus, sit amet sagittis nibh lobortis mollis. Aenean ultrices arcu et tellus finibus mollis.</p>
-			<p class = "nombre"> por Admin General</p>
-		</div>
-		</a>
 	</section>	
 </body>
 </html>
