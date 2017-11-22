@@ -1,0 +1,57 @@
+body{
+	background-color: #F7FFF9;
+	cursor: default;
+}
+
+nav {
+	position: relative;
+	background-color: #0AB632;
+	border-radius: 5px;
+	height: 50px;
+	font-size: 20px;
+	font-style: oblique;
+	box-shadow: 0px 8px 5px #888888;
+}
+
+ul li {
+	display: inline-block;
+	text-align: center;
+	height: 35px;
+	padding-top: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+	cursor: pointer;
+
+}
+
+ul li:hover{
+	background-color: #139B33;
+	font-weight: bold;
+}
+
+ul{
+	display: inline;
+	margin-left: 50px;
+}
+
+nav p{
+	position: absolute;
+	display: inline;
+	right: 100px;
+	top: -5px;
+	cursor: default;
+}
+
+nav a{
+	position: absolute;
+	right: 50px;
+	top: 10px;
+	height: 30px;
+	width: 30px;
+
+}
+
+#logout{
+	height: 30px;
+	width: 30px;
+}
