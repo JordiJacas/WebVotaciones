@@ -17,10 +17,11 @@
 		<ul>
 			<li>Inicio</li>
 			<li>Perfil</li>
-			<li>Mis consultas</li>
+			<li>Mis Consultas</li>
+			<li>Crear Consultas</li>
 		</ul>
 		<p><?php echo $row['nombre'] . " " . $row['apellido']; ?></p>
-		<a href = "logout.php"><img id = "logout"  src="../img/logout.png"></a>
+		<a href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
 	</nav>
 		
 	<section>

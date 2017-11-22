@@ -37,7 +37,7 @@
 		if($row['nombre'] == $_SESSION['usr']){
 			$_SESSION['row'] = $row;
 
-			header('Location: http://localhost:8080/WebVotaciones/php/menuPrincipal.php');
+			header('Location: http://localhost/WebVotaciones/php/menuPrincipal.php');
 		}
 	?>
 
