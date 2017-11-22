@@ -1,0 +1,27 @@
+.buttons{
+	position: absolute;
+	right: 200px;
+	top: 20px;
+	display: inline-block;
+}
+
+form{
+	position: relative;
+	top: 100px;
+	left: 100px;
+}
+
+input[type=textarea]{
+	width: 50%;
+	height: 100px;
+}
+
+input{
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.lOpciones {
+	position: relative;
+	margin-left: 50px;
+}
