@@ -25,10 +25,10 @@
 		<a href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
 	</nav>
 
-	<form action = "insertarConsulta.php" method = "post">
+	<form id="myform" action="insertarConsulta.php" method="post" onsubmit="return enviar();">
 		<label>Escribe la consulta:</label><br>
 		<input type="textArea" name="consulta" id="consulta"><br>
-		<input type="submit" name="crearConsulta" style="display:none;">
+		<input type="submit" name="crearConsulta" value="Crear Consulta"style="display:none;">
 	<form>
 
 	<div class = "buttons">

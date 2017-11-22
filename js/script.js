@@ -29,3 +29,17 @@ function crearOpcion(){
 function eSubmit(){
 	document.forms["crearConsulta"].submit();
 }
+
+function enviar(){
+	var formulario = document.getElementById("myform");	
+	var dato = formulario[0];
+ 
+	if (dato.value=="Crear Consulta"){
+		alert("ola");
+		formulario.submit();
+		return true;
+	} else {
+		alert("ola2");
+		return false;
+	}
+}
