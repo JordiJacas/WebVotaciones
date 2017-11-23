@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
 	<title>Consulta</title>
 </head>
-<body>
+<body onload="onload()">
 <?php
 	session_start();
 	
@@ -25,15 +25,15 @@
 		<a id = "lLogout" href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
 	</nav>
 
-	<form id="myform" action="enviarConsulta.php" method="post" onsubmit="return enviar();">
-		<label>Escribe la consulta:</label><br>
-		<input type="textArea" name="consulta" id="consulta"><br>
-		<input type="submit" name="crearConsulta" id="crearConsulta" value=" "style="display:none;">
-	<form>
+	<form id="myform" action="enviarConsulta.php" method="post" onsubmit="return enviar()">
+		<input type="submit" name="eConsulta" id="eConsulta" value=" " style="display:none;">
+	</form>
 
 	<div class = "buttons">
-		<input type="button" name="crearOpciones" value="Crear Opciones" onclick="crearOpcion()">
-		<input type="submit" name="crearConsulta" value="Crear Consulta" onclick="eSubmit()">
-	</diV>
+		<button id="crearC" onclick="crearConsulta()">Crear Consulta</button>
+		<button id="crearO" onclick="crearOpcion()">Crear Opciones</button>
+		<button id="enviarC" onclick="eSubmit()">Enviar Consulta</button>
+
+	</div>
 </body>
 </html>

@@ -1,5 +1,54 @@
 var numOpciones = 0;
 
+
+function onload(){
+	document.getElementById('crearO').disabled = true;
+	//document.getElementById('enviarC').disabled = true;
+}
+
+function isNull(){
+	if (document.getElementById('consulta').value != ""){
+		enableDisable('crearO');
+	}
+}
+
+
+function crearConsulta(){
+	var label = document.createElement("label");
+	var textNodeLabel = document.createTextNode("Escribe la consulta: ");
+	label.appendChild(textNodeLabel);
+
+	var textarea = document.createElement("textarea");
+	textarea.setAttribute('id','consulta')
+	textarea.setAttribute('name','consulta')
+	
+	var br = document.createElement("br");
+	var br2 = document.createElement("br");
+
+
+	var lugar = document.getElementById("myform").lastElement;
+	document.body.getElementsByTagName("form")[0].insertBefore(label, lugar);
+	document.body.getElementsByTagName("form")[0].insertBefore(br, lugar);
+	document.body.getElementsByTagName("form")[0].insertBefore(textarea, lugar);
+	document.body.getElementsByTagName("form")[0].insertBefore(br2, lugar);
+
+	enableDisable('crearC');
+	enableDisable('crearO');
+
+}
+
+function enableDisable(id){
+
+	btn = document.getElementById(id);
+
+	if(btn.disabled == true){
+		btn.disabled = false;
+	}
+	else if(btn.disabled == false){
+		btn.disabled = true;
+	}
+}
+
 function crearOpcion(){
 	numOpciones++;
 
@@ -28,7 +77,10 @@ function crearOpcion(){
 }
 
 function eSubmit(){
-	document.getElementById('crearConsulta').value = 'Crear Consulta';
+	var submit = document.getElementById('eConsulta')
+	var formulario = document.getElementById("myform");
+	submit.value = 'Crear Consulta';
+	formulario.submit();
 }
 
 function borrarOpcion(id){
@@ -43,7 +95,8 @@ function borrarOpcion(id){
 
 function enviar(){
 	var formulario = document.getElementById("myform");	
-	var dato = document.getElementById('crearConsulta');
+	var dato = document.getElementById('eConsulta');
+	alert("ola");
  
 	if (dato.value=="Crear Consulta"){
 		formulario.submit();

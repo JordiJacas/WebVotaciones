@@ -1,7 +1,7 @@
 .buttons{
 	position: absolute;
 	right: 200px;
-	top: 20px;
+	top: 100px;
 	display: inline-block;
 }
 
@@ -11,9 +11,12 @@ form{
 	left: 100px;
 }
 
-input[type=textarea]{
+textarea{
 	width: 50%;
 	height: 100px;
+	resize: none;
+	font-size: 20px;
+
 }
 
 input{

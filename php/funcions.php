@@ -24,26 +24,12 @@
 
 		//anem agafant les fileres d'amb una amb una
 		$row = $query->fetch();
-		if($row['id_user'] != null){
-			while ( $row ) {
-				$idUser = $row['id_user'];
-			 	$nombreUser = $row['nombre'];
-			 	$apellidoUser  = $row['apellido'];
-			 	$emailUser = $row['email'];
-			 	$psswd = $row['password'];
-			 	$isAdmin = $row['isAdmin'];	
 
-			 	return $row;			
-			  $row = $query->fetch();
-			}
-		}
+		return $row;			
+		$row = $query->fetch();
 
 		//eliminem els objectes per alliberar memòria 
 		unset($pdo); 
 		unset($query);
-	}
-
-	function salirSession(){
-		session_destroy();
 	}
 ?>
