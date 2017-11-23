@@ -20,7 +20,7 @@
 	</div>
 	<?php
 		session_start();
-		include 'php/connectar.php';
+		include 'php/funcions.php';
 
 		if(!isset($_SESSION['usr']) || !isset($_SESSION['password'])){
 			$_SESSION['usr'] = " ";
