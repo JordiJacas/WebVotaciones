@@ -11,8 +11,7 @@
 <?php
 	session_start();
 	
-	//print_r($_SESSION['row']);
-	//$row = $_SESSION['row'];
+	$row = $_SESSION['row'];
 ?>
 	<nav>
 		<ul>
@@ -21,7 +20,7 @@
 			<li><a>Mis Consultas</a></li>
 			<li><a href="crearConsulta.php" >Crear Consultas</a></li>
 		</ul>
-		<p><?php //echo $row['nombre'] . " " . $row['apellido']; ?></p>
+		<p><?php echo $row['nombre'] . " " . $row['apellido']; ?></p>
 		<a id = "lLogout" href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
 	</nav>
 

@@ -16,6 +16,7 @@ function crearOpcion(){
 	label.setAttribute('id','l'+numOpciones);
 	input.setAttribute('class','iOpciones');
 	input.setAttribute('id','i'+numOpciones);
+	input.setAttribute('name','i['+numOpciones+']');
 	borrar.setAttribute('id','b'+numOpciones);
 	borrar.setAttribute('onclick','borrarOpcion('+numOpciones+')');
 

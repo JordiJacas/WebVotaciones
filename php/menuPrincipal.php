@@ -21,7 +21,7 @@
 			<li><a href="crearConsulta.php" >Crear Consultas</a></li>
 		</ul>
 		<p><?php echo $row['nombre'] . " " . $row['apellido']; ?></p>
-		<a href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
+		<a id = "lLogout" href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
 	</nav>
 		
 	<section>
