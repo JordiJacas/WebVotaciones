@@ -11,6 +11,7 @@
 <?php
 	session_start();
 	
+	//print_r($_SESSION['row']);
 	$row = $_SESSION['row'];
 ?>
 	<nav>
