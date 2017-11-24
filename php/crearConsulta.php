@@ -25,10 +25,6 @@
 		<a id = "lLogout" href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
 	</nav>
 
-	<form id="myform" action="enviarConsulta.php" method="post" onsubmit="return enviar()">
-		<input type="submit" name="eConsulta" id="eConsulta" value=" " style="display:none;">
-	</form>
-
 	<div class = "buttons">
 		<button id="crearC" onclick="crearConsulta()">Crear Consulta</button>
 		<button id="crearO" onclick="crearOpcion()">Crear Opciones</button>

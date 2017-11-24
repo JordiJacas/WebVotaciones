@@ -14,6 +14,7 @@ function isNull(){
 
 
 function crearConsulta(){
+
 	var label = document.createElement("label");
 	var textNodeLabel = document.createTextNode("Escribe la consulta: ");
 	label.appendChild(textNodeLabel);
@@ -42,19 +43,37 @@ function crearConsulta(){
 	inputDataFinal.setAttribute('name','fechaFinal')
 	inputDataFinal.setAttribute('class','fecha');
 
-	var lugar = document.getElementById("myform").lastElement;
-	document.body.getElementsByTagName("form")[0].insertBefore(label, lugar);
-	document.body.getElementsByTagName("form")[0].insertBefore(br, lugar);
-	document.body.getElementsByTagName("form")[0].insertBefore(textarea, lugar);
-	document.body.getElementsByTagName("form")[0].insertBefore(br2, lugar);
+	var submit = document.createElement('submit');
+	submit.setAttribute('id','eConsulta');
+	submit.setAttribute('value',' ');
+	submit.setAttribute('type','submit');
+	submit.setAttribute('name','eConsulta');
+	submit.setAttribute('style','display:none');
 
-	document.body.getElementsByTagName("form")[0].insertBefore(labelDataInici, lugar);
-	document.body.getElementsByTagName("form")[0].insertBefore(inputDataInici, lugar);
+	var form = document.createElement("form");
+	form.setAttribute('action','enviarConsulta.php');
+	form.setAttribute('method','post');
+	form.setAttribute('id','myform');
+	form.setAttribute('onsubmit','return enviar()');
 
-	document.body.getElementsByTagName("form")[0].insertBefore(labelDataFinal, lugar);
-	document.body.getElementsByTagName("form")[0].insertBefore(inputDataFinal, lugar);
+	form.appendChild(label);
+	form.appendChild(br);
+	form.appendChild(textarea);
+	form.appendChild(br2);
 
-	document.body.getElementsByTagName("form")[0].insertBefore(br3, lugar);
+	form.appendChild(labelDataInici);
+	form.appendChild(inputDataInici);
+
+	form.appendChild(labelDataFinal);
+	form.appendChild(inputDataFinal);
+
+	form.appendChild(br3);
+
+	form.appendChild(submit);
+
+	var padre = document.body;
+
+	padre.insertBefore(form,padre.childNodes[3]);
 
 	enableDisable('crearC');
 	enableDisable('crearO');
