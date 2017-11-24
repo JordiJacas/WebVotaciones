@@ -27,7 +27,7 @@
 
 	<div class = "buttons">
 		<button id="crearC" onclick="crearConsulta()">Crear Consulta</button>
-		<button id="crearO" onclick="crearOpcion()">Crear Opciones</button>
+		<button id="crearO" onclick="validarConsulta()">Crear Opciones</button>
 		<button id="enviarC" onclick="eSubmit()">Enviar Consulta</button>
 
 	</div>

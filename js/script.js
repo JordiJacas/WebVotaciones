@@ -1,17 +1,33 @@
+//Globales
 var numOpciones = 0;
-
+var isConsultaNull = true;
 
 function onload(){
 	document.getElementById('crearO').disabled = true;
-	//document.getElementById('enviarC').disabled = true;
+	document.getElementById('enviarC').disabled = true;
 }
 
-function isNull(){
-	if (document.getElementById('consulta').value != ""){
-		enableDisable('crearO');
+function validarConsulta(){
+	var consulta = document.getElementById('consulta')
+	var dFinal = document.getElementById('fechaFinal')
+	var dInicial = document.getElementById('fechaInicial')
+
+	if(consulta.value != "" && dFinal.value != "" && dInicial.value != ""){
+		isConsultaNull = false
+		crearOpcion();
+	}else{
+		isConsultaNull = true;
+		alert("Campos vacios");
 	}
 }
 
+function validarNumOpciones(){
+	if(numOpciones >= 2){
+		return true;
+	}
+
+	return false;
+}
 
 function crearConsulta(){
 
@@ -34,6 +50,7 @@ function crearConsulta(){
 	var inputDataInici = document.createElement("input");
 	inputDataInici.setAttribute('name','fechaInicial');
 	inputDataInici.setAttribute('class','fecha');
+	inputDataInici.setAttribute('id','fechaInicial');
 
 	var labelDataFinal = document.createElement("label");
 	var textNodeLabelFinal = document.createTextNode(" Fecha de cierre: ");
@@ -42,6 +59,7 @@ function crearConsulta(){
 	var inputDataFinal = document.createElement("input");
 	inputDataFinal.setAttribute('name','fechaFinal')
 	inputDataFinal.setAttribute('class','fecha');
+	inputDataFinal.setAttribute('id','fechaFinal');
 
 	var submit = document.createElement('submit');
 	submit.setAttribute('id','eConsulta');
@@ -77,6 +95,8 @@ function crearConsulta(){
 
 	enableDisable('crearC');
 	enableDisable('crearO');
+	enableDisable('enviarC');
+
 
 }
 
@@ -120,10 +140,15 @@ function crearOpcion(){
 }
 
 function eSubmit(){
-	var submit = document.getElementById('eConsulta')
-	var formulario = document.getElementById("myform");
-	submit.value = 'Crear Consulta';
-	formulario.submit();
+
+	if(!isConsultaNull && validarNumOpciones){
+		var submit = document.getElementById('eConsulta')
+		var formulario = document.getElementById("myform");
+		submit.value = 'Crear Consulta';
+		formulario.submit();
+	}
+
+	alert("ola");
 }
 
 function borrarOpcion(id){
@@ -133,6 +158,7 @@ function borrarOpcion(id){
 	iBorrar.parentNode.removeChild(iBorrar);
 	bBorrar.parentNode.removeChild(bBorrar);
 	lBorrar.parentNode.removeChild(lBorrar);
+	numOpciones--;
 }
 
 
