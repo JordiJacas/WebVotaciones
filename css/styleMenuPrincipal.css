@@ -18,14 +18,8 @@ section a{
 
 .consulta .descripcion{
 	position: relative;
-	margin: 20px 20px 0px 20px;
+	margin: 20px 20px 20px 20px;
 	font-size: 25px;
-}
-
-.consulta .nombre{
-	position: relative;
-	width: 200px;
-	left: 70%;
 }
 
 .consulta:hover{

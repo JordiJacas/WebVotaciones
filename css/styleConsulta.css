@@ -28,3 +28,9 @@ input{
 	position: relative;
 	margin-left: 50px;
 }
+
+.fecha{
+	width: 100px;
+	margin-right: 10px;
+	height: 12px;
+}

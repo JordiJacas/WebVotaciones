@@ -4,15 +4,14 @@
 	<link rel="stylesheet" type="text/css" href="../css/styleNav.css">
 	<link rel="stylesheet" type="text/css" href="../css/styleMenuPrincipal.css">
 	<meta charset="utf-8">
-	<title>Web Votaciones</title>
+	<title>Consulta</title>
 </head>
 <body>
 <?php
 	session_start();
 	include 'funcions.php';
-	
-	//print_r($_SESSION['row']);
 	$row = $_SESSION['row'];
+	$id_consulta = $_GET['id_consulta'];
 ?>
 	<nav>
 		<ul>
@@ -28,8 +27,9 @@
 	<section>
 		<?php
 			$pdo = connectar();
-			mostrarTodasConsultas($pdo);
-		?>	
+			mostrarConsulta($pdo,$id_consulta);
+			mostrarOpciones($pdo,$id_consulta);
+		?>
 	</section>	
 </body>
 </html>

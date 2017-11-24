@@ -9,21 +9,21 @@
 	$row = $_SESSION['row'];
 
 	//preparem i executem la consulta
-	$query = $pdo->prepare("insert into consultas (descripcion, id_admin) values ('".$consulta."',".$row['id_user'].")");
+	$query = $pdo->prepare("insert into Consultas (descripcion, id_admin) values ('".$consulta."',".$row['id_user'].")");
 	$query->execute();
 	
-	$query = $pdo->prepare("select id_consulta from consultas where descripcion = '".$consulta."'");
+	$query = $pdo->prepare("select id_consulta from Consultas where descripcion = '".$consulta."'");
 	$query->execute();
 	$dades = $query->fetch();
 	
 	foreach($array as $opcio){
-		$query = $pdo->prepare("insert into opciones (id_consulta, texto) values (".$dades['id_consulta'].",'".$opcio."')");
+		$query = $pdo->prepare("insert into Opciones (id_consulta, texto) values (".$dades['id_consulta'].",'".$opcio."')");
 		$query->execute();
-	}
-	
+  	}
+
 	//eliminem els objectes per alliberar memòria 
 	unset($pdo); 
 	unset($query);
-	
 
+	header('Location: http://localhost/WebVotaciones/php/crearConsulta.php');
 ?>

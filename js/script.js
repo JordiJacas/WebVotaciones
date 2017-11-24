@@ -24,13 +24,37 @@ function crearConsulta(){
 	
 	var br = document.createElement("br");
 	var br2 = document.createElement("br");
+	var br3 = document.createElement("br");
 
+	var labelDataInici = document.createElement("label");
+	var textNodeLabelInici = document.createTextNode("Fecha de apertura: ");
+	labelDataInici.appendChild(textNodeLabelInici);
+
+	var inputDataInici = document.createElement("input");
+	inputDataInici.setAttribute('name','fechaInicial');
+	inputDataInici.setAttribute('class','fecha');
+
+	var labelDataFinal = document.createElement("label");
+	var textNodeLabelFinal = document.createTextNode(" Fecha de cierre: ");
+	labelDataFinal.appendChild(textNodeLabelFinal);
+
+	var inputDataFinal = document.createElement("input");
+	inputDataFinal.setAttribute('name','fechaFinal')
+	inputDataFinal.setAttribute('class','fecha');
 
 	var lugar = document.getElementById("myform").lastElement;
 	document.body.getElementsByTagName("form")[0].insertBefore(label, lugar);
 	document.body.getElementsByTagName("form")[0].insertBefore(br, lugar);
 	document.body.getElementsByTagName("form")[0].insertBefore(textarea, lugar);
 	document.body.getElementsByTagName("form")[0].insertBefore(br2, lugar);
+
+	document.body.getElementsByTagName("form")[0].insertBefore(labelDataInici, lugar);
+	document.body.getElementsByTagName("form")[0].insertBefore(inputDataInici, lugar);
+
+	document.body.getElementsByTagName("form")[0].insertBefore(labelDataFinal, lugar);
+	document.body.getElementsByTagName("form")[0].insertBefore(inputDataFinal, lugar);
+
+	document.body.getElementsByTagName("form")[0].insertBefore(br3, lugar);
 
 	enableDisable('crearC');
 	enableDisable('crearO');
