@@ -14,17 +14,10 @@
 	$query->execute();
 	$votos = $query->fetch();
 	
-	if($votos==null){
-		//preparem i executem la consulta
-		$query = $pdo->prepare("insert into Votos (id_opcion, contador) values (".$respuesta.",1)");
-		$query->execute();
-	}else{
+	//preparem i executem la consulta
+	$query = $pdo->prepare("insert into Votos (id_opcion, id_user) values (".$respuesta.",".$row['id_user'].")");
+	$query->execute();
 
-		$contador = $votos['contador'];
-		$contador++;
-		$query = $pdo->prepare("update Votos set contador=".$contador." where id_opcion = ".$respuesta."");
-		$query->execute();;
-	}
 
 	//eliminem els objectes per alliberar memòria 
 	unset($pdo); 

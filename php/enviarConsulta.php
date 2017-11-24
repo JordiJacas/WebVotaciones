@@ -5,6 +5,8 @@
 	$pdo = connectar();
 	
 	$consulta = $_POST['consulta'];
+	$fechaFinal = $_POST['fechaFinal'];
+	$fechaInicial = $_POST['fechaInicial'];
 	$array = $_POST['i'];
 	$row = $_SESSION['row'];
 
