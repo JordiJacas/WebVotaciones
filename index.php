@@ -8,7 +8,7 @@
 <body>
 
 	
-	<div id = "inicioSession">
+	<div>
 		<h1>Iniciar Session</h1>
 		<form action = " " method = "post">
 			<label>Nombre: </label> <br>
