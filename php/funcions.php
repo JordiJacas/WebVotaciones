@@ -35,10 +35,10 @@
 		$query = $pdo->prepare("select * FROM Consultas");
 		$query->execute();
 		$consulta = $query->fetch();
-		echo "<div  class = 'consulta' id='".$consulta['id_consulta']."' onclick='mostrarOpciones(this)'>";
+		echo "<div  class = 'consulta' >";
 			while($consulta){
 				
-				echo "<div class = 'descripcion'>".$consulta['descripcion']."</div>";
+				echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarOpciones(this)'>".$consulta['descripcion']."</div>";
 				mostrarOpciones($pdo,$consulta['id_consulta']);
 				$consulta = $query->fetch();
 			}
@@ -57,11 +57,11 @@
 				<form action='votar.php' method='post'>";
 
 		while($opciones){
-			echo "<input type='radio' name='respuesta' value='".$opciones['id_opcion']."'>".$opciones['texto']."<br>";
+			echo "<input type='radio' name='respuesta' value='".$opciones['id_opcion']."'>".$opciones['texto']."";
 		
 			$opciones = $query->fetch();
 		}
-		echo "	<input type='submit' name='votar' value='Votar'><br>
+		echo "	<br><input class='votar' type='submit' name='votar' value='Votar'><br>
 			</form>
 			</div>";
 	}

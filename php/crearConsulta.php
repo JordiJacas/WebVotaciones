@@ -19,7 +19,7 @@
 		<ul>
 			<li><a href="menuPrincipal.php" >Inicio</a></li>
 			<li><a>Perfil</a></li>
-			<li><a>Mis Consultas</a></li>
+			<!--<li><a>Mis Consultas</a></li>-->
 			<li><a href="crearConsulta.php" >Crear Consultas</a></li>
 		</ul>
 		<p><?php echo $row['nombre'] . " " . $row['apellido']; ?></p>
