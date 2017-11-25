@@ -4,6 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/styleNav.css">
 	<link rel="stylesheet" type="text/css" href="../css/styleConsulta.css">
 	<script type="text/javascript" src="../js/script.js"></script>
+
 	<meta charset="utf-8">
 	<title>Consulta</title>
 </head>
@@ -25,11 +26,10 @@
 		<a id = "lLogout" href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
 	</nav>
 
-	<div class = "buttons">
-		<button id="crearC" onclick="crearConsulta()">Crear Consulta</button>
-		<button id="crearO" onclick="validarConsulta()">Crear Opciones</button>
-		<button id="enviarC" onclick="eSubmit()">Enviar Consulta</button>
-
+	<div class="buttons">
+		<button id="crearC" class="oButtons" onclick="crearConsulta()">Crear Consulta</button>
+		<button id="crearO" class="oButtons" onclick="validarConsulta()">Crear Opciones</button>
+		<button id="enviarC" class="oButtons" onclick="eSubmit()">Enviar Consulta</button>
 	</div>
 </body>
 </html>

@@ -5,6 +5,33 @@
 	display: inline-block;
 }
 
+.oButtons {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.oButtons:hover {
+    background-color: #45a049;
+}
+
+.borrarButtons {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.borrarButtons:hover {
+    background-color: #45a049;
+}
+
 form{
 	position: relative;
 	top: 100px;
@@ -16,7 +43,6 @@ textarea{
 	height: 100px;
 	resize: none;
 	font-size: 20px;
-
 }
 
 input{
@@ -27,10 +53,17 @@ input{
 .lOpciones {
 	position: relative;
 	margin-left: 50px;
+
 }
 
 .fecha{
-	width: 100px;
+	width: 80px;
 	margin-right: 10px;
 	height: 12px;
+	font-size: 11px;
+	text-align: center;
+}
+
+.iOpciones{
+	margin-right: 20px;
 }
