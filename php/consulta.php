@@ -32,6 +32,9 @@
 		<?php
 			$pdo = connectar();
 			mostrarConsulta($pdo,$id_consulta);
+		?>
+		
+		<?php
 			mostrarOpciones($pdo,$id_consulta);
 		?>
 	</section>	

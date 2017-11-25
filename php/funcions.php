@@ -35,25 +35,17 @@
 		$query = $pdo->prepare("select * FROM Consultas");
 		$query->execute();
 		$consulta = $query->fetch();
-	
-		while($consulta){
-			
-			echo "<div  class = 'consulta'>
-					<a href='consulta.php?id_consulta=".$consulta['id_consulta']."'>
-						<p class = 'descripcion'>".$consulta['descripcion']."</p>
-					</a>
-				</div>";
-			$consulta = $query->fetch();
-		}		
-	}
-
-	function mostrarConsulta($pdo,$id_consulta){
-
-		$query = $pdo->prepare("select * FROM Consultas WHERE id_consulta = ".$id_consulta."");
-		$query->execute();
-		$consulta = $query->fetch();
-
-		echo $consulta['descripcion'];
+		echo "<div  class = 'consulta' id='".$consulta['id_consulta']."' onclick='mostrarOpciones(this)'>";
+			while($consulta){
+				
+				echo "<div class = 'descripcion'>".$consulta['descripcion']."</div>";
+				mostrarOpciones($pdo,$consulta['id_consulta']);
+				$consulta = $query->fetch();
+			}
+		echo "</div>";
+		//eliminem els objectes per alliberar memòria 
+		unset($pdo); 
+		unset($query);
 	}
 
 	function mostrarOpciones($pdo,$id_consulta){
@@ -61,7 +53,8 @@
 		$query->execute();
 		$opciones = $query->fetch();
 
-		echo "<form action='votar.php' method='post'>";
+		echo "<div class='opcionesOculto' id='o".$id_consulta."'>
+				<form action='votar.php' method='post'>";
 
 		while($opciones){
 			echo "<input type='radio' name='respuesta' value='".$opciones['id_opcion']."'>".$opciones['texto']."<br>";
@@ -69,6 +62,7 @@
 			$opciones = $query->fetch();
 		}
 		echo "	<input type='submit' name='votar' value='Votar'><br>
-			</form>";
+			</form>
+			</div>";
 	}
 ?>

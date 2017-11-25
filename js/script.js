@@ -69,6 +69,7 @@ function validarOpciones(){
 		if(inputs[num].value != ""){
 			numOpcionesNull++;
 		}
+		inputs[num].style.border = "2px solid red";
 	}
 	
 	if(numOpciones >= 2 && numOpcionesNull == inputs.length){
@@ -242,4 +243,18 @@ function enviar(){
 	} else {
 		return false;
 	}
+}
+
+function mostrarOpciones(b){
+	var numId = b.id;
+	var nombreClasse = document.getElementById('o'+ numId).className
+	
+	if(nombreClasse == 'opcionesOculto'){
+		document.getElementById('o'+ numId).className = 'opcionesVisible';
+		
+	}else if(nombreClasse == 'opcionesVisible'){
+		document.getElementById('o'+ numId).className = 'opcionesOculto';
+	}
+	
+	
 }

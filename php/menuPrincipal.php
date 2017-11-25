@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="../css/styleNav.css">
 	<link rel="stylesheet" type="text/css" href="../css/styleMenuPrincipal.css">
+	<script type="text/javascript" src="../js/script.js"></script>
 	<meta charset="utf-8">
 	<title>Web Votaciones</title>
 </head>
@@ -10,6 +11,7 @@
 <?php
 	session_start();
 	include 'funcions.php';
+	$pdo = connectar();
 	
 	//print_r($_SESSION['row']);
 	$row = $_SESSION['row'];
@@ -30,10 +32,11 @@
 	</nav>
 		
 	<section>
+		
 		<?php
-			$pdo = connectar();
 			mostrarTodasConsultas($pdo);
-		?>	
+		?>
+		
 	</section>	
 </body>
 </html>

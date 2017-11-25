@@ -14,6 +14,7 @@ section a{
 	border: 1px solid #000;
 	box-shadow: 5px 8px 5px #888888;
 	background-color: #E9E9E9;
+	cursor: pointer;
 }
 
 .consulta .descripcion{
@@ -24,4 +25,12 @@ section a{
 
 .consulta:hover{
 	background-color: #BCBBBB;
+}
+
+.opcionesOculto{
+	display: none; 
+}
+
+.opcionesVisible{
+	display: inline; 
 }
