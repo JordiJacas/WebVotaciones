@@ -17,21 +17,7 @@
 
 		return $pdo;
 	}
-	function login($pdo){
-
-		//preparem i executem la consulta
-		$query = $pdo->prepare("select * FROM Usuarios WHERE nombre = '".$_SESSION['usr']."' and password = '".$_SESSION['password']."'");
-		$query->execute();
-
-		//anem agafant les fileres d'amb una amb una
-		$row = $query->fetch();
-
-		return $row;
-
-		//eliminem els objectes per alliberar memòria 
-		unset($pdo); 
-		unset($query);
-	}
+	
 	function mostrarTodasConsultas($pdo,$id_user){
 		$query = $pdo->prepare("select * FROM Consultas");
 		$query->execute();
