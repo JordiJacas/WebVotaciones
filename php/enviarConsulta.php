@@ -9,6 +9,11 @@
 	$fechaInicial = $_POST['fechaInicial'];
 	$array = $_POST['i'];
 	$row = $_SESSION['row'];
+	
+	echo $consulta;
+	echo $fechaFinal;
+	echo $fechaInicial;
+	print_r($array);
 
 	//preparem i executem la consulta
 	$query = $pdo->prepare("insert into Consultas (descripcion, id_admin) values ('".$consulta."',".$row['id_user'].")");
@@ -27,5 +32,5 @@
 	unset($pdo); 
 	unset($query);
 
-	header('Location: http://localhost/WebVotaciones/php/crearConsulta.php');
+	header('Location: http://localhost/WebVotaciones/php/menuPrincipal.php');
 ?>

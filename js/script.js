@@ -68,8 +68,10 @@ function validarOpciones(){
 	for(var num=0; num<inputs.length;num++){
 		if(inputs[num].value != ""){
 			numOpcionesNull++;
+		}else{
+			inputs[num].style.border = "2px solid red";
 		}
-		inputs[num].style.border = "2px solid red";
+		
 	}
 	
 	if(numOpciones >= 2 && numOpcionesNull == inputs.length){
@@ -86,9 +88,9 @@ function crearConsulta(){
 	var textNodeLabel = document.createTextNode("Escribe la consulta: ");
 	label.appendChild(textNodeLabel);
 
-	var textarea = document.createElement("textarea");
-	textarea.setAttribute('id','consulta')
-	textarea.setAttribute('name','consulta')
+	var textareaConsulta = document.createElement("textarea");
+	textareaConsulta.setAttribute('id','consulta')
+	textareaConsulta.setAttribute('name','consulta')
 	
 	var br = document.createElement("br");
 	var br2 = document.createElement("br");
@@ -114,37 +116,37 @@ function crearConsulta(){
 	inputDataFinal.setAttribute('id','fechaFinal');
 	inputDataFinal.setAttribute('placeholder','DD/MM/YYYY');
 
-	var submit = document.createElement('submit');
-	submit.setAttribute('id','eConsulta');
-	submit.setAttribute('value',' ');
-	submit.setAttribute('type','submit');
-	submit.setAttribute('name','eConsulta');
-	submit.setAttribute('style','display:none');
+	var bsubmit = document.createElement('input');
+	bsubmit.setAttribute('id','eConsulta');
+	bsubmit.setAttribute('value',' ');
+	bsubmit.setAttribute('type','submit');
+	bsubmit.setAttribute('name','eConsulta');
+	bsubmit.setAttribute('style','display:none');
 
-	var form = document.createElement("form");
-	//form.setAttribute('action','enviarConsulta.php');
-	form.setAttribute('method','post');
-	form.setAttribute('id','myform');
-	form.setAttribute('onsubmit','return enviar()');
+	var formulario = document.createElement("form");
+	formulario.setAttribute('action','enviarConsulta.php');
+	formulario.setAttribute('method','post');
+	formulario.setAttribute('id','myform');
+	formulario.setAttribute('onsubmit','return enviar()');
 
-	form.appendChild(label);
-	form.appendChild(br);
-	form.appendChild(textarea);
-	form.appendChild(br2);
+	formulario.appendChild(label);
+	formulario.appendChild(br);
+	formulario.appendChild(textareaConsulta);
+	formulario.appendChild(br2);
 
-	form.appendChild(labelDataInici);
-	form.appendChild(inputDataInici);
+	formulario.appendChild(labelDataInici);
+	formulario.appendChild(inputDataInici);
 
-	form.appendChild(labelDataFinal);
-	form.appendChild(inputDataFinal);
+	formulario.appendChild(labelDataFinal);
+	formulario.appendChild(inputDataFinal);
 
-	form.appendChild(br3);
+	formulario.appendChild(br3);
 
-	form.appendChild(submit);
+	formulario.appendChild(bsubmit);
 
 	var padre = document.body;
 
-	padre.insertBefore(form,padre.childNodes[3]);
+	padre.insertBefore(formulario,padre.childNodes[3]);
 
 	enableDisable('crearC');
 	enableDisable('crearO');
@@ -203,6 +205,9 @@ function eSubmit(){
 		var submit = document.getElementById('eConsulta')
 		var formulario = document.getElementById("myform");
 		submit.value = 'Crear Consulta';
+		enableDisable('consulta');
+		enableDisable('fechaInicial');
+		enableDisable('fechaFinal');
 		formulario.submit();
 	}
 

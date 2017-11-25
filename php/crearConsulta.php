@@ -24,8 +24,8 @@
 		</ul>
 		<p><?php echo $row['nombre'] . " " . $row['apellido']; ?></p>
 		<a id = "lLogout" href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
-	</nav>
-
+	</nav>	
+	
 	<div class="buttons">
 		<button id="crearC" class="oButtons" onclick="crearConsulta()">Crear Consulta</button>
 		<button id="crearO" class="oButtons" onclick="validarConsulta()">Crear Opciones</button>

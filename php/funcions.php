@@ -23,14 +23,15 @@
 		$query->execute();
 		$consulta = $query->fetch();
 		
-		echo "<div  class = 'consulta' >";
+		
 			while($consulta){
-				
+				echo "<div  class = 'consulta' >";
 				echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarOpciones(this)'>".$consulta['descripcion']."</div>";
 				mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
 				$consulta = $query->fetch();
+				echo "</div>";
 			}
-		echo "</div>";
+		
 		//eliminem els objectes per alliberar memòria 
 		unset($pdo); 
 		unset($query);
