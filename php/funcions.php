@@ -78,7 +78,7 @@
 	
 	function mostrarResultados($pdo,$id_consulta,$id_user){
 		
-		$query = $pdo->prepare("select * FROM Votos WHERE EXISTS (select * FROM opciones WHERE id_consulta = ".$id_consulta.") and id_user = 1");
+		$query = $pdo->prepare("select * FROM Votos WHERE EXISTS (select * FROM opciones WHERE id_consulta = ".$id_consulta.") and id_user = ".$id_user."");
 		$query->execute();
 		$opciones = $query->fetch();
 		
