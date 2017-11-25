@@ -1,4 +1,5 @@
 <?php
+	
 	function connectar(){
 		//connexió dins block try-catch:
 		//  prova d'executar el contingut del try
@@ -31,15 +32,16 @@
 		unset($pdo); 
 		unset($query);
 	}
-	function mostrarTodasConsultas($pdo){
+	function mostrarTodasConsultas($pdo,$id_user){
 		$query = $pdo->prepare("select * FROM Consultas");
 		$query->execute();
 		$consulta = $query->fetch();
+		
 		echo "<div  class = 'consulta' >";
 			while($consulta){
 				
 				echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarOpciones(this)'>".$consulta['descripcion']."</div>";
-				mostrarOpciones($pdo,$consulta['id_consulta']);
+				mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
 				$consulta = $query->fetch();
 			}
 		echo "</div>";
@@ -48,21 +50,41 @@
 		unset($query);
 	}
 
-	function mostrarOpciones($pdo,$id_consulta){
+	function mostrarOpciones($pdo,$id_consulta,$id_user){
 		$query = $pdo->prepare("select * FROM Opciones WHERE id_consulta = ".$id_consulta."");
 		$query->execute();
 		$opciones = $query->fetch();
-
+		$voto = mostrarResultados($pdo,$id_consulta,$id_user);
 		echo "<div class='opcionesOculto' id='o".$id_consulta."'>
 				<form action='votar.php' method='post'>";
 
 		while($opciones){
-			echo "<input type='radio' name='respuesta' value='".$opciones['id_opcion']."'>".$opciones['texto']."";
+			
+			if($opciones['id_opcion'] == $voto['id_opcion']){
+				echo "<input type='radio' name='respuesta' value='".$opciones['id_opcion']."' checked>".$opciones['texto']."";
+			}else if($opciones['id_opcion'] != $voto['id_opcion']){
+				echo "<input type='radio' name='respuesta' value='".$opciones['id_opcion']."'>".$opciones['texto']."";
+			}
 		
 			$opciones = $query->fetch();
 		}
 		echo "	<br><input class='votar' type='submit' name='votar' value='Votar'><br>
+				<input type='text' value='".$voto['id_voto']."' name='voto' style='display:none;'>
 			</form>
 			</div>";
+		unset($pdo); 
+		unset($query);
+	}
+	
+	function mostrarResultados($pdo,$id_consulta,$id_user){
+		
+		$query = $pdo->prepare("select * FROM Votos WHERE EXISTS (select * FROM opciones WHERE id_consulta = ".$id_consulta.") and id_user = 1");
+		$query->execute();
+		$opciones = $query->fetch();
+		
+		return $opciones;
+
+		unset($pdo); 
+		unset($query);
 	}
 ?>

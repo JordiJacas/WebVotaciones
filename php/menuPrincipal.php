@@ -34,7 +34,7 @@
 	<section>
 		
 		<?php
-			mostrarTodasConsultas($pdo);
+			mostrarTodasConsultas($pdo,$row['id_user']);
 		?>
 		
 	</section>	
