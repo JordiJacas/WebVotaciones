@@ -6,7 +6,6 @@
 	<title>Web Votaciones</title>
 </head>
 <body>
-
 	
 	<div>
 		<h1>Iniciar Session</h1>
@@ -17,6 +16,7 @@
 			<input type="password" name="password"/> <br>
 			<input class = "submit" type="submit" name="submitIniciar" value="Enviar"/>
 		</form>
+		<a href="#">Registrarse</a>
 	</div>
 
 </body>
