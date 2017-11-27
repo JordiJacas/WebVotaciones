@@ -17,6 +17,7 @@
 ?>
 	<nav>
 		<ul>
+			<img src="../img/logo.png" id="logo">
 			<li><a href="menuPrincipal.php" >Inicio</a></li>
 			<li><a>Perfil</a></li>
 			<!--<li><a>Mis Consultas</a></li>-->
