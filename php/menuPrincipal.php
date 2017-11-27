@@ -13,7 +13,6 @@
 	include 'funcions.php';
 	$pdo = connectar();
 	
-	//print_r($_SESSION['row']);
 	$row = $_SESSION['row'];
 ?>
 	<nav>

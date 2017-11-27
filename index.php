@@ -16,7 +16,6 @@
 			<input type="password" name="password"/> <br>
 			<input class = "submit" type="submit" name="submitIniciar" value="Enviar"/>
 		</form>
-		<a href="#">Registrarse</a>
 	</div>
 
 </body>
