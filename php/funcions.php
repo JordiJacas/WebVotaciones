@@ -17,6 +17,23 @@
 
 		return $pdo;
 	}
+
+	function mostraUsuarios($pdo){
+		$query = $pdo->prepare("select * FROM Usuarios");
+		$query->execute();
+		$usuarios = $query->fetch();
+		//mostren el resultat de les consulta.
+
+			while($usuarios){
+				echo "Nombre: ".$usuarios['nombre']."   Contraseña: " . $usuarios['password'];
+				$usuarios = $query->fetch();
+			}
+		
+		//eliminem els objectes per alliberar memòria 
+		unset($pdo); 
+		unset($query);
+	}
+
 	
 	function mostrarTodasConsultas($pdo,$id_user){
 		$query = $pdo->prepare("select * FROM Consultas");

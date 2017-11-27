@@ -83,9 +83,12 @@ function validarOpciones(){
 		if(inputs[num].value != ""){
 			//Sumamos 1 si los inputs tienen contenido.
 			numOpcionesNotNull++;
+			//Cambiamos el color del borde si esta dentro.
+			inputs[num].style.borderColor = "";
+
 		}else{
 			//Cambiamos el color del borde si estan vacios.
-			inputs[num].style.border = "2px solid red";
+			inputs[num].style.borderColor = "red";
 		}
 		
 	}
@@ -99,6 +102,16 @@ function validarOpciones(){
 	return false;
 }
 
+function colorLleno(b) {
+    b.style.borderColor = "";
+
+}
+function colorVacio(b) {
+	if(b.value == ""){
+    	b.style.borderColor = "red";
+	}
+}
+
 function crearConsulta(){
 	
 	//Creamos el label y el texto que tendra.	
@@ -110,6 +123,8 @@ function crearConsulta(){
 	var textareaConsulta = document.createElement("textarea");
 	textareaConsulta.setAttribute('id','consulta')
 	textareaConsulta.setAttribute('name','consulta')
+	textareaConsulta.setAttribute('onfocusin','colorLleno(this)');
+	textareaConsulta.setAttribute('onfocusout','colorVacio(this)');
 	
 	//Creamos los todos los br.
 	var br = document.createElement("br");
@@ -126,6 +141,8 @@ function crearConsulta(){
 	inputDataInici.setAttribute('name','fechaInicial');
 	inputDataInici.setAttribute('class','fecha');
 	inputDataInici.setAttribute('id','fechaInicial');
+	inputDataInici.setAttribute('onfocusin','colorLleno(this)');
+	inputDataInici.setAttribute('onfocusout','colorVacio(this)');
 	inputDataInici.setAttribute('placeholder','DD/MM/YYYY');
 	
 	//Creamos el label de la fecha final.
@@ -135,6 +152,8 @@ function crearConsulta(){
 	
 	//Creamos el input de la fecha final y le añadimos atributos.
 	var inputDataFinal = document.createElement("input");
+	inputDataFinal.setAttribute('onfocusin','colorLleno(this)');
+	inputDataFinal.setAttribute('onfocusout','colorVacio(this)');
 	inputDataFinal.setAttribute('name','fechaFinal')
 	inputDataFinal.setAttribute('class','fecha');
 	inputDataFinal.setAttribute('id','fechaFinal');
@@ -174,7 +193,7 @@ function crearConsulta(){
 	//Intorducimos el formulario dentro del body,
 	var padre = document.body;
 
-	padre.insertBefore(formulario,padre.childNodes[3]);
+	padre.insertBefore(formulario,padre.childNodes[4]);
 	
 	//Habilitamos los votones de Crear Opciones y Enviar Consula, y deshabilitamos el boton de Crear Consulta. 
 	enableDisable('crearC');
@@ -211,6 +230,8 @@ function crearOpcion(){
 	//Creamos el input y le añadimos atributos.
 	var input = document.createElement("input");
 	input.setAttribute('class','iOpciones');
+	input.setAttribute('onfocusin','colorLleno(this)');
+	input.setAttribute('onfocusout','colorVacio(this)');
 	input.setAttribute('id','i'+numOpciones);
 	input.setAttribute('name','i[]');
 	

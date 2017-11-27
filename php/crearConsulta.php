@@ -2,13 +2,13 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="../css/styleNav.css">
-	<link rel="stylesheet" type="text/css" href="../css/styleConsulta.css">
+	<link rel="stylesheet" type="text/css" href="../css/styleConsulta.css">	
 	<script type="text/javascript" src="../js/script.js"></script>
 
 	<meta charset="utf-8">
 	<title>Consulta</title>
 </head>
-<body onload="onload()">
+<body onload="onload()" id="snow">
 <?php
 	session_start();
 	
@@ -16,8 +16,8 @@
 	$row = $_SESSION['row'];
 ?>
 	<nav>
+		<img src="../img/logo.png" id="logo">
 		<ul>
-			<img src="../img/logo.png" id="logo">
 			<li><a href="menuPrincipal.php" >Inicio</a></li>
 			<li><a>Perfil</a></li>
 			<!--<li><a>Mis Consultas</a></li>-->

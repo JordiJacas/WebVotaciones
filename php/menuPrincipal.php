@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
 	<title>Web Votaciones</title>
 </head>
-<body>
+<body id="snow">
 <?php
 	session_start();
 	include 'funcions.php';
@@ -15,15 +15,9 @@
 	
 	$row = $_SESSION['row'];
 ?>
-
-<div class=nieve>
-	
-	<img id ="copo1" src="../img/copo1.png">
-
-</div>
 	<nav>
+		<img src="../img/logo.png" id="logo">
 		<ul>
-			<img src="../img/logo.png" id="logo">
 			<li><a href="menuPrincipal.php" >Inicio</a></li>
 			<li><a>Perfil</a></li>
 			<!--<li><a>Mis Consultas</a></li>-->
