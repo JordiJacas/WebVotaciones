@@ -76,15 +76,15 @@ nav #lLogout{
 }
 
 #copo1{
-	animation: snow 5s infinite;
+	animation: snow 40s infinite;
 	background-repeat: repeat;
 	width: 5%;
 	position: relative;
-	margin-left: 20%;
+	z-index: 1000;
 }
 @keyframes snow{
 	0%	{top: 0px; left: 0px;}
-	100%{top:80%; left: 75%;}
+	100%{top:90%; left: 95%;}
 }
 
 a{
