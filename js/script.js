@@ -35,7 +35,14 @@ function validarConsulta(){
 		//Ponemos la variable global a true i mostramos un mensaje.
 		isConsultaNull = true;
 		alert("Campos vacios");
+		pintaRojo('consulta');
+		pintaRojo('fechaInicial');
+		pintaRojo('fechaFinal');
 	}
+}
+
+function pintaRojo (id){
+	document.getElementById(id).style.borderColor = 'red';
 }
 
 function validatFecha(dFinal, dInicial){
@@ -60,13 +67,19 @@ function validatFecha(dFinal, dInicial){
 	if(dInicial > fechaActual && dInicial < dFinal && tiempoFecha >= 1){
 		return true;	
 	}else if(tiempoFecha == 0){
-		alert('Timepo minimo 1 dia');
+		alert('Tiempo minimo 1 dia');
+		pintaRojo('fechaInicial');
+		pintaRojo('fechaFinal');
 	}else if(tiempoFecha < 0){
 		alert('El dia de cierre no puede ser menor que el de apertura');
+		pintaRojo('fechaFinal');
 	}else if(dInicial <= fechaActual){
 		alert('El dia ha de ser posterior al dia actual');
+		pintaRojo('fechaInicial');
 	}else{
 		alert('Formato Incorrecto');
+		pintaRojo('fechaInicial');
+		pintaRojo('fechaFinal');
 	}
 
 	return false;
@@ -314,6 +327,7 @@ function enviar(){
 	//Comparamos el valor del submit para decidir si ejecutamos o no el formulario.
 	if (dato.value=="Crear Consulta"){
 		formulario.submit();
+		alert('Formulario enviado correctamente.');
 		return true;
 	} else {
 		return false;

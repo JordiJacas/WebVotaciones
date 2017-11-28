@@ -113,10 +113,10 @@ a{
 }
 
 nav{
-	position: absolute;
+	position: fixed;
 	height: 100%;
 	width: 20%;
-	background-color: #606060;
+	/*background-color: #11ff49;*/
 	top: 0;
 	left: 0;
 	text-align: center;
@@ -124,6 +124,7 @@ nav{
 
 #logo{
 	width: 90%;
+	margin-top: 3%;
 }
 
 nav > a{
@@ -143,7 +144,7 @@ li:hover{
 li {
 	width: 100%;
 	display: block;
-	background-color: #06ED3C;
+	background-color: #01b22b;
 	cursor: pointer;
 	margin-top: 5%;
 	padding: 5px;
