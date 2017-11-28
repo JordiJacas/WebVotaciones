@@ -29,12 +29,16 @@ section a{
 
 .opcionesOculto{
 	height: 0;
-	transition: height 2s;
+	opacity: 0;
+	transition-property: opacity, height;
+    transition-duration: 1s, 2s;
 }
 
 .opcionesVisible{
-	height: 100px;
-	transition: height 2s;
+    opacity: 1;
+    height: 50px;
+	transition-property: opacity, height;
+    transition-duration: 8s, 2s;
 }
 
 input[type=radio]{
