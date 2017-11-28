@@ -38,7 +38,7 @@ section a{
     opacity: 1;
     height: 50px;
 	transition-property: opacity, height;
-    transition-duration: 8s, 2s;
+    transition-duration: 4s, 1s;
 }
 
 input[type=radio]{

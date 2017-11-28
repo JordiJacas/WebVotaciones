@@ -316,6 +316,8 @@ function borrarOpcion(id){
 		label[num].innerHTML = "Opcion " + numLabel + ": "
 		numLabel++
 	}
+
+	habilitarConsulta();
 }
 
 
