@@ -8,6 +8,7 @@
 	<title>Web Votaciones</title>
 </head>
 <body id="snow">
+<audio src="../song/cascabeles.mp3" autoplay="true" loop="true"></audio>
 <?php
 	session_start();
 	include 'funcions.php';
@@ -19,8 +20,8 @@
 		<img src="../img/logo.png" id="logo">
 		<ul>
 			<li><a href="menuPrincipal.php" >Inicio</a></li>
-			<li><a>Perfil</a></li>
-			<!--<li><a>Mis Consultas</a></li>-->
+			<!--<li><a>Perfil</a></li>
+			<li><a>Mis Consultas</a></li>-->
 			<?php
 				if($row['isAdmin']==1){
 					echo "<li><a href='crearConsulta.php' >Crear Consultas</a></li>";

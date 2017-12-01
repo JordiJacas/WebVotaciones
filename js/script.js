@@ -73,7 +73,7 @@ function validatFecha(dFinal, dInicial){
 	}else if(tiempoFecha < 0){
 		alert('El dia de cierre no puede ser menor que el de apertura');
 		pintaRojo('fechaFinal');
-	}else if(dInicial <= fechaActual){
+	}else if(dInicial < fechaActual){
 		alert('El dia ha de ser posterior al dia actual');
 		pintaRojo('fechaInicial');
 	}else{
@@ -365,4 +365,3 @@ function mostrarOpciones(elemento){
 		document.getElementById('o'+ numId).className = 'opcionesOculto';
 	}
 }
-
