@@ -65,11 +65,10 @@ input{
 }
 
 .fecha{
-	width: 80px;
+	width: 100px;
 	margin-right: 10px;
 	height: 12px;
 	font-size: 11px;
-	text-align: center;
 }
 
 .iOpciones{

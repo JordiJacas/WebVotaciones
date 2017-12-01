@@ -2,5 +2,5 @@
 	include 'funcions.php';
 	$pdo = connectar();
 
-	mostrarTodasConsultas($pdo,1);
+	mostrarConsultasUsuario($pdo,1);
 ?>

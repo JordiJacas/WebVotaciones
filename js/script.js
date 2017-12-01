@@ -53,12 +53,12 @@ function validatFecha(dFinal, dInicial){
 	var mes = fechaActual.getMonth();
 	
 	//Separamos los distintos numero (dd/mm/yyyy) i los introducimos en una array.
-	dFinal = document.getElementById("fechaFinal").value.split("/");
-	dInicial = document.getElementById("fechaInicial").value.split("/");
+	dFinal = document.getElementById("fechaFinal").value.split("-");
+	dInicial = document.getElementById("fechaInicial").value.split("-");
 	
 	//Obtenemos los valores de las arrays y passamos las variables a formato de fecha.
-	dFinal = new Date(parseInt(dFinal[2]),parseInt(dFinal[1]),parseInt(dFinal[0]))
-	dInicial = new Date(parseInt(dInicial[2]),parseInt(dInicial[1]),parseInt(dInicial[0]))
+	dFinal = new Date(parseInt(dFinal[0]),parseInt(dFinal[1]),parseInt(dFinal[2]))
+	dInicial = new Date(parseInt(dInicial[0]),parseInt(dInicial[1]),parseInt(dInicial[2]))
 	
 	//Calculamos la diferencia que hay entre las dos fechas.
 	var tiempoFecha = dFinal - dInicial;
@@ -73,7 +73,7 @@ function validatFecha(dFinal, dInicial){
 	}else if(tiempoFecha < 0){
 		alert('El dia de cierre no puede ser menor que el de apertura');
 		pintaRojo('fechaFinal');
-	}else if(dInicial < fechaActual){
+	}else if(dInicial <= fechaActual){
 		alert('El dia ha de ser posterior al dia actual');
 		pintaRojo('fechaInicial');
 	}else{
@@ -154,9 +154,9 @@ function crearConsulta(){
 	inputDataInici.setAttribute('name','fechaInicial');
 	inputDataInici.setAttribute('class','fecha');
 	inputDataInici.setAttribute('id','fechaInicial');
+	inputDataInici.setAttribute('type','date');
 	inputDataInici.setAttribute('onfocusin','colorLleno(this)');
 	inputDataInici.setAttribute('onfocusout','colorVacio(this)');
-	inputDataInici.setAttribute('placeholder','DD/MM/YYYY');
 	
 	//Creamos el label de la fecha final.
 	var labelDataFinal = document.createElement("label");
@@ -167,10 +167,10 @@ function crearConsulta(){
 	var inputDataFinal = document.createElement("input");
 	inputDataFinal.setAttribute('onfocusin','colorLleno(this)');
 	inputDataFinal.setAttribute('onfocusout','colorVacio(this)');
-	inputDataFinal.setAttribute('name','fechaFinal')
+	inputDataFinal.setAttribute('name','fechaFinal');
+	inputDataFinal.setAttribute('type','date');
 	inputDataFinal.setAttribute('class','fecha');
 	inputDataFinal.setAttribute('id','fechaFinal');
-	inputDataFinal.setAttribute('placeholder','DD/MM/YYYY');
 	
 	//Creamos un submit que ejecutara el formulario y le añadimos atributos.
 	var bsubmit = document.createElement('input');
