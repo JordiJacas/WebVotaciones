@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Temps de generació: 04-12-2017 a les 19:36:20
+-- Temps de generació: 04-12-2017 a les 19:45:36
 -- Versió del servidor: 5.7.20-0ubuntu0.16.04.1
 -- Versió de PHP: 7.0.22-0ubuntu0.16.04.1
 
@@ -28,7 +28,6 @@ USE `Encuestas`;
 -- Estructura de la taula `Consultas`
 --
 
-DROP TABLE IF EXISTS `Consultas`;
 CREATE TABLE `Consultas` (
   `id_consulta` int(5) NOT NULL,
   `descripcion` varchar(20) NOT NULL,
@@ -51,11 +50,9 @@ INSERT INTO `Consultas` (`id_consulta`, `descripcion`, `id_admin`, `fechaInicial
 -- Estructura de la taula `Invitaciones`
 --
 
-DROP TABLE IF EXISTS `Invitaciones`;
 CREATE TABLE `Invitaciones` (
   `id_admin` int(5) NOT NULL,
-  `id_consulta` int(5) NOT NULL,
-  `token` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+  `id_consulta` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -64,7 +61,6 @@ CREATE TABLE `Invitaciones` (
 -- Estructura de la taula `Opciones`
 --
 
-DROP TABLE IF EXISTS `Opciones`;
 CREATE TABLE `Opciones` (
   `id_opcion` int(5) NOT NULL,
   `id_consulta` int(5) NOT NULL,
@@ -88,23 +84,23 @@ INSERT INTO `Opciones` (`id_opcion`, `id_consulta`, `texto`) VALUES
 -- Estructura de la taula `Usuarios`
 --
 
-DROP TABLE IF EXISTS `Usuarios`;
 CREATE TABLE `Usuarios` (
   `id_user` int(5) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `isAdmin` int(1) NOT NULL DEFAULT '0'
+  `isAdmin` int(1) NOT NULL DEFAULT '0',
+  `token` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Bolcant dades de la taula `Usuarios`
 --
 
-INSERT INTO `Usuarios` (`id_user`, `nombre`, `apellido`, `email`, `password`, `isAdmin`) VALUES
-(1, 'Admin', 'General', 'admin@general.com', 'admingeneral', 1),
-(2, 'public', 'general', 'public@gmail.com', 'public', 0);
+INSERT INTO `Usuarios` (`id_user`, `nombre`, `apellido`, `email`, `password`, `isAdmin`, `token`) VALUES
+(1, 'Admin', 'General', 'admin@general.com', 'admingeneral', 1, ''),
+(2, 'public', 'general', 'public@gmail.com', 'public', 0, '');
 
 -- --------------------------------------------------------
 
@@ -112,7 +108,6 @@ INSERT INTO `Usuarios` (`id_user`, `nombre`, `apellido`, `email`, `password`, `i
 -- Estructura de la taula `Votos`
 --
 
-DROP TABLE IF EXISTS `Votos`;
 CREATE TABLE `Votos` (
   `id_voto` int(5) NOT NULL,
   `id_opcion` int(5) NOT NULL,
@@ -137,7 +132,6 @@ ALTER TABLE `Consultas`
 --
 ALTER TABLE `Invitaciones`
   ADD PRIMARY KEY (`id_admin`,`id_consulta`),
-  ADD UNIQUE KEY `token` (`token`),
   ADD KEY `consultasInvitaciones` (`id_consulta`);
 
 --
