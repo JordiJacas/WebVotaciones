@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Temps de generació: 04-12-2017 a les 16:35:41
+-- Temps de generació: 04-12-2017 a les 19:36:20
 -- Versió del servidor: 5.7.20-0ubuntu0.16.04.1
 -- Versió de PHP: 7.0.22-0ubuntu0.16.04.1
 
@@ -54,7 +54,8 @@ INSERT INTO `Consultas` (`id_consulta`, `descripcion`, `id_admin`, `fechaInicial
 DROP TABLE IF EXISTS `Invitaciones`;
 CREATE TABLE `Invitaciones` (
   `id_admin` int(5) NOT NULL,
-  `id_consulta` int(5) NOT NULL
+  `id_consulta` int(5) NOT NULL,
+  `token` varchar(100) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -136,6 +137,7 @@ ALTER TABLE `Consultas`
 --
 ALTER TABLE `Invitaciones`
   ADD PRIMARY KEY (`id_admin`,`id_consulta`),
+  ADD UNIQUE KEY `token` (`token`),
   ADD KEY `consultasInvitaciones` (`id_consulta`);
 
 --

@@ -120,6 +120,7 @@
 					//}else if($consulta[''] == true){
 						echo "<input type='submit' value='Desactivar'>";
 					//}
+				echo "<form action='' method='post'><input type='submit' value='Invitar'></form>";		
 				echo "</form>";
 				echo "</div>";
 			}
@@ -127,5 +128,16 @@
 		//eliminem els objectes per alliberar memòria 
 		unset($pdo); 
 		unset($query);
+	}
+
+	function todosUsuarios($pdo,$id_user){
+		$query = $pdo->prepare("select * FROM Usuarios Where id_user != ".$id_user."");
+		$query->execute();
+		$usuarios = $query->fetch();
+
+		while($usuarios){
+			echo "<input type='checkbox' name='email[]' value='".$usuarios['email']."'>".$usuarios['nombre'] . " " .$usuarios['apellido']."<br>";
+			$usuarios = $query->fetch();
+		}
 	}
 ?>
