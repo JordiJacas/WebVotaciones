@@ -20,7 +20,7 @@
 		<img src="../img/logo.png" id="logo">
 		<ul>
 			<li><a href="menuPrincipal.php" >Inicio</a></li>
-			<!--<li><a>Perfil</a></li>
+			<!-- <li><a>Crear Usuario</a></li>
 			<li><a>Mis Consultas</a></li>-->
 			<?php
 				if($row['isAdmin']==1){

@@ -25,7 +25,7 @@
 		//mostren el resultat de les consulta.
 
 			while($usuarios){
-				echo "Nombre: ".$usuarios['nombre']."   Contraseña: " . $usuarios['password'] . "<br>	";
+				echo "Nombre: ".$usuarios['nombre']."   Contraseña: " . $usuarios['password'] ."   isAdmin: " . $usuarios['isAdmin'] . "<br>	";
 				$usuarios = $query->fetch();
 			}
 		
