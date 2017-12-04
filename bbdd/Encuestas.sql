@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Temps de generació: 24-11-2017 a les 19:27:16
+-- Temps de generació: 04-12-2017 a les 16:35:41
 -- Versió del servidor: 5.7.20-0ubuntu0.16.04.1
 -- Versió de PHP: 7.0.22-0ubuntu0.16.04.1
 
@@ -28,18 +28,22 @@ USE `Encuestas`;
 -- Estructura de la taula `Consultas`
 --
 
+DROP TABLE IF EXISTS `Consultas`;
 CREATE TABLE `Consultas` (
   `id_consulta` int(5) NOT NULL,
   `descripcion` varchar(20) NOT NULL,
-  `id_admin` int(5) NOT NULL
+  `id_admin` int(5) NOT NULL,
+  `fechaInicial` date NOT NULL,
+  `fechaFinal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Bolcant dades de la taula `Consultas`
 --
 
-INSERT INTO `Consultas` (`id_consulta`, `descripcion`, `id_admin`) VALUES
-(25, 'Funcionaras', 1);
+INSERT INTO `Consultas` (`id_consulta`, `descripcion`, `id_admin`, `fechaInicial`, `fechaFinal`) VALUES
+(31, 'Consulta 1', 1, '2017-12-05', '2017-12-12'),
+(32, 'Prueba apertura', 1, '2017-12-03', '2017-12-08');
 
 -- --------------------------------------------------------
 
@@ -47,6 +51,7 @@ INSERT INTO `Consultas` (`id_consulta`, `descripcion`, `id_admin`) VALUES
 -- Estructura de la taula `Invitaciones`
 --
 
+DROP TABLE IF EXISTS `Invitaciones`;
 CREATE TABLE `Invitaciones` (
   `id_admin` int(5) NOT NULL,
   `id_consulta` int(5) NOT NULL
@@ -58,6 +63,7 @@ CREATE TABLE `Invitaciones` (
 -- Estructura de la taula `Opciones`
 --
 
+DROP TABLE IF EXISTS `Opciones`;
 CREATE TABLE `Opciones` (
   `id_opcion` int(5) NOT NULL,
   `id_consulta` int(5) NOT NULL,
@@ -69,8 +75,11 @@ CREATE TABLE `Opciones` (
 --
 
 INSERT INTO `Opciones` (`id_opcion`, `id_consulta`, `texto`) VALUES
-(21, 25, 'si'),
-(22, 25, 'no');
+(29, 31, 'Opcion 1'),
+(30, 31, 'Opcion 2'),
+(31, 32, 'Opcion 1'),
+(32, 32, 'Opcion 2'),
+(33, 32, 'Opcion 3');
 
 -- --------------------------------------------------------
 
@@ -78,6 +87,7 @@ INSERT INTO `Opciones` (`id_opcion`, `id_consulta`, `texto`) VALUES
 -- Estructura de la taula `Usuarios`
 --
 
+DROP TABLE IF EXISTS `Usuarios`;
 CREATE TABLE `Usuarios` (
   `id_user` int(5) NOT NULL,
   `nombre` varchar(20) NOT NULL,
@@ -92,7 +102,8 @@ CREATE TABLE `Usuarios` (
 --
 
 INSERT INTO `Usuarios` (`id_user`, `nombre`, `apellido`, `email`, `password`, `isAdmin`) VALUES
-(1, 'Admin', 'General', 'admin@general.com', 'admingeneral', 1);
+(1, 'Admin', 'General', 'admin@general.com', 'admingeneral', 1),
+(2, 'public', 'general', 'public@gmail.com', 'public', 0);
 
 -- --------------------------------------------------------
 
@@ -100,18 +111,12 @@ INSERT INTO `Usuarios` (`id_user`, `nombre`, `apellido`, `email`, `password`, `i
 -- Estructura de la taula `Votos`
 --
 
+DROP TABLE IF EXISTS `Votos`;
 CREATE TABLE `Votos` (
   `id_voto` int(5) NOT NULL,
   `id_opcion` int(5) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Bolcant dades de la taula `Votos`
---
-
-INSERT INTO `Votos` (`id_voto`, `id_opcion`, `id_user`) VALUES
-(4, 22, 1);
 
 --
 -- Indexos per taules bolcades
@@ -122,7 +127,9 @@ INSERT INTO `Votos` (`id_voto`, `id_opcion`, `id_user`) VALUES
 --
 ALTER TABLE `Consultas`
   ADD PRIMARY KEY (`id_consulta`),
-  ADD KEY `id_admin` (`id_admin`) USING BTREE;
+  ADD KEY `id_admin` (`id_admin`) USING BTREE,
+  ADD KEY `fechaInicial` (`fechaInicial`),
+  ADD KEY `fechaFinal` (`fechaFinal`);
 
 --
 -- Index de la taula `Invitaciones`
@@ -160,22 +167,22 @@ ALTER TABLE `Votos`
 -- AUTO_INCREMENT per la taula `Consultas`
 --
 ALTER TABLE `Consultas`
-  MODIFY `id_consulta` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_consulta` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT per la taula `Opciones`
 --
 ALTER TABLE `Opciones`
-  MODIFY `id_opcion` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_opcion` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT per la taula `Usuarios`
 --
 ALTER TABLE `Usuarios`
-  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT per la taula `Votos`
 --
 ALTER TABLE `Votos`
-  MODIFY `id_voto` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_voto` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- Restriccions per taules bolcades
 --
