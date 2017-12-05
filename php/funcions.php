@@ -71,11 +71,11 @@
 		while($opciones){
 			
 			//decidim si el input(radio) esta checked o no.
-			//if($opciones['id_opcion'] == $voto['id_opcion']){
-			//	echo "<input type='radio' name='respuesta' value='".$opciones['id_opcion']."' checked>".$opciones['texto']."";
-			//}else if($opciones['id_opcion'] != $voto['id_opcion']){
+			if($opciones['id_opcion'] == $voto['id_opcion']){
+				echo "<input type='radio' name='respuesta' value='".$opciones['id_opcion']."' checked>".$opciones['texto']."";
+			}else if($opciones['id_opcion'] != $voto['id_opcion']){
 				echo "<input type='radio' name='respuesta' value='".$opciones['id_opcion']."'>".$opciones['texto']."";
-			//}
+			}
 		
 			$opciones = $query->fetch();
 		}
