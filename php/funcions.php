@@ -1,5 +1,5 @@
 <?php
-	
+	//WHERE fechaInicial <= '".$fecha."' AND fechaFinal < '".$fecha."'
 	function connectar(){
 		//connexió dins block try-catch:
 		//  prova d'executar el contingut del try
@@ -39,7 +39,7 @@
 		$hoy = getdate();
 		$fecha = $hoy['year'] ."-".$hoy['mon']."-".$hoy['mday'];
 
-		$query = $pdo->prepare("select * FROM Consultas WHERE fechaInicial <= '".$fecha."' AND fechaFinal < '".$fecha."'");
+		$query = $pdo->prepare("select * FROM Consultas ");
 		$query->execute();
 		$consulta = $query->fetch();
 		//mostren el resultat de les consulta.
