@@ -49,6 +49,10 @@ function validatFecha(dFinal, dInicial){
 	
 	//Obtenemos los elementos.
 	var fechaActual = new Date();
+	fechaActual.setHours(00);
+	fechaActual.setMinutes(00)
+	fechaActual.setSeconds(00)
+	fechaActual.setMilliseconds(00)
     var dia = fechaActual.getDate();
 	var mes = fechaActual.getMonth();
 	
@@ -57,13 +61,14 @@ function validatFecha(dFinal, dInicial){
 	dInicial = document.getElementById("fechaInicial").value.split("-");
 	
 	//Obtenemos los valores de las arrays y passamos las variables a formato de fecha.
-	dFinal = new Date(parseInt(dFinal[0]),parseInt(dFinal[1]),parseInt(dFinal[2]))
-	dInicial = new Date(parseInt(dInicial[0]),parseInt(dInicial[1]),parseInt(dInicial[2]))
+	dFinal = new Date(parseInt(dFinal[0]),parseInt(dFinal[1]-1),parseInt(dFinal[2]));
+	dInicial = new Date(parseInt(dInicial[0]),parseInt(dInicial[1]-1),parseInt(dInicial[2]));
 	
 	//Calculamos la diferencia que hay entre las dos fechas.
 	var tiempoFecha = dFinal - dInicial;
 	
 	//Comparamos las fechas, si hay algun error muestra un mensaje con ese error i devuelve false, si no devuleve true.
+	alert(fechaActual + dInicial);
 	if(dInicial > fechaActual && dInicial < dFinal && tiempoFecha >= 1){
 		return true;	
 	}else if(tiempoFecha == 0){
