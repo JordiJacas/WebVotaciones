@@ -12,7 +12,6 @@
 <?php
 	session_start();
 	
-	//print_r($_SESSION['row']);
 	$row = $_SESSION['row'];
 ?>
 	<nav>
@@ -31,6 +30,7 @@
 		<button id="crearC" class="oButtons" onclick="crearConsulta()">Crear Consulta</button>
 		<button id="crearO" class="oButtons" onclick="validarConsulta()">Crear Opciones</button>
 		<button id="enviarC" class="oButtons" onclick="eSubmit()">Enviar Consulta</button>
+		<button id="borrarO" class="oButtons" onclick="borrarTodasOpciones()">Borrar Opciones</button>
 	</div>
 </body>
 </html>
