@@ -8,14 +8,8 @@
 <?php
 	include 'funcions.php';
 	$pdo = connectar();
-
-	//mostrarConsultasUsuario($pdo,1);
-	echo "<form action='email.php' method='post'>
-		<label>Emails: </label>
-		<textarea name='email'></textarea>
-		<br>
-		<input type='submit' value='invitar'>
-		</form>";
+	$aa = countResultado($pdo, 31);
+	echo($aa);
 ?>
 </body>
 </html>

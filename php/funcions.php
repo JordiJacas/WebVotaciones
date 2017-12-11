@@ -64,19 +64,27 @@
 		//executem la funcio per saber si l'usuari ha votat i la opcion que ha escollit.
 		$voto = mostrarResultados($pdo,$id_consulta,$id_user);
 		
+
 		//mostrem el resultat obtingut.
 		echo "<div class='opcionesOculto' id='o".$id_consulta."'>
 				<form action='votar.php' method='post'>";
 
 		while($opciones){
-			
+			if($id_user == 1){
+				$contadorVoto = countResultado($pdo, $opciones['id_opcion']);
+				$mostrarVotos = "&nbsp; Votos:".$contadorVoto;
+			}else{
+				$mostrarVotos = "";
+			}
 			//decidim si el input(radio) esta checked o no.
 			if($opciones['id_opcion'] == $voto['id_opcion']){
 				echo "<input type='radio' name='respuesta' value='".$opciones['id_opcion']."' checked>".$opciones['texto']."";
+				echo $mostrarVotos;
 			}else if($opciones['id_opcion'] != $voto['id_opcion']){
 				echo "<input type='radio' name='respuesta' value='".$opciones['id_opcion']."'>".$opciones['texto']."";
+				echo $mostrarVotos;
 			}
-		
+			
 			$opciones = $query->fetch();
 		}
 		echo "	<br><input class='votar' type='submit' name='votar' value='Votar'><br>
@@ -139,5 +147,12 @@
 			echo "<input type='checkbox' name='email[]' value='".$usuarios['email']."'>".$usuarios['nombre'] . " " .$usuarios['apellido']."<br>";
 			$usuarios = $query->fetch();
 		}
+	}
+
+	function countResultado($pdo, $id_opcion){
+		$query = $pdo->prepare("SELECT COUNT(id_voto) FROM Votos WHERE id_opcion=".$id_opcion."");
+		$query->execute();
+		$votos = $query->fetch();
+		return $votos['COUNT(id_voto)'];
 	}
 ?>
