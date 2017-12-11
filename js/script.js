@@ -369,12 +369,16 @@ function borrarOpcion(id){
 	var bBorrar = document.getElementById('b'+id)
 	var lBorrar = document.getElementById('l'+id)
 	var brBorrar = document.getElementById('br'+id)
+	var sBorrar = document.getElementById('s'+id);
+	var uBorrar = document.getElementById('u'+id);
 	
 	//Borramos todos los elementos.
 	iBorrar.parentNode.removeChild(iBorrar);
 	bBorrar.parentNode.removeChild(bBorrar);
 	lBorrar.parentNode.removeChild(lBorrar);
 	brBorrar.parentNode.removeChild(brBorrar);
+	sBorrar.parentNode.removeChild(sBorrar);
+	uBorrar.parentNode.removeChild(uBorrar);
 	
 	//Resta 1 a la variable global.
 	numOpciones--;
@@ -392,13 +396,13 @@ function subirOpcion(id){
 	//Variable inicial.
 	var nuevaPos = id - 1;
 
-	//Averiguamos que opcion se esta escojiendo. I si es la primera opcion no se ejecutara.
-	if(id != 0){
 
-		//Obtenemos los elementos con su id.
-		var input = document.getElementById('i'+id);
-		var input2 = document.getElementById('i'+nuevaPos);
-		
+	//Obtenemos los elementos con su id.
+	var input = document.getElementById('i'+id);
+	var input2 = document.getElementById('i'+nuevaPos);
+
+	if(input2 != null){
+	
 		//Cojemos el valor de los inputs.
 		var valorInput = input.value;
 		var valorInput2 = input2.value;
@@ -413,13 +417,11 @@ function bajarOpcion(id){
 	//Variable inicial.
 	var nuevaPos = id + 1;
 
-	//Averiguamos que opcion se esta escojiendo. I si es la ultima opcion no se ejecutara.
-	if(id != numOpciones){
+	//Obtenemos los elementos con su id.
+	var input = document.getElementById('i'+id);
+	var input2 = document.getElementById('i'+nuevaPos);
 
-		//Obtenemos los elementos con su id.
-		var input = document.getElementById('i'+id);
-		var input2 = document.getElementById('i'+nuevaPos);
-		
+	if(input2 != null){
 		//Cojemos el valor de los inputs.
 		var valorInput = input.value;
 		var valorInput2 = input2.value;
@@ -428,6 +430,7 @@ function bajarOpcion(id){
 		input.value = valorInput2;
 		input2.value = valorInput;
 	}
+
 }
 
 function borrarTodasOpciones(){
