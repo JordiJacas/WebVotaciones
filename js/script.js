@@ -72,7 +72,6 @@ function validatFecha(dFinal, dInicial){
 	
 	tiempoFecha = tiempoFecha / 3600;
 	
-	alert(tiempoFecha)
 	//Comparamos las fechas, si hay algun error muestra un mensaje con ese error i devuelve false, si no devuleve true.
 	if(dInicial > fechaActual && dInicial < dFinal && tiempoFecha >= 4000){
 		return true;	
@@ -312,12 +311,30 @@ function crearOpcion(){
 	var br = document.createElement("br");
 	br.setAttribute('id','br'+numOpciones);
 	br.setAttribute('class','brOpciones');
+
+	//Creamos el boton de subir, le añadimos los atributos y el texo.
+	var subir = document.createElement("button");
+	subir.setAttribute('id','s'+numOpciones);
+	subir.setAttribute('class','subirButtons');
+	subir.setAttribute('onclick','subirOpcion('+numOpciones+')');
+	var textNodeButton = document.createTextNode("▲");
+	subir.appendChild(textNodeButton);
+
+	//Creamos el boton de bajar, le añadimos los atributos y el texo.
+	var bajar = document.createElement("button");
+	bajar.setAttribute('id','u'+numOpciones);
+	bajar.setAttribute('class','bajarButtons');
+	bajar.setAttribute('onclick','bajarOpcion('+numOpciones+')');
+	var textNodeButton = document.createTextNode("▼");
+	bajar.appendChild(textNodeButton);
 	
 	//Insertamos todos los elementos dentro del form, en la ultima posicion.
  	var lugar = document.getElementsByTagName("form")[0].lastElement;
  	document.body.getElementsByTagName("form")[0].insertBefore(label,lugar);
  	document.body.getElementsByTagName("form")[0].insertBefore(input,lugar);
  	document.body.getElementsByTagName("form")[0].insertBefore(borrar,lugar);
+ 	document.body.getElementsByTagName("form")[0].insertBefore(subir,lugar);
+ 	document.body.getElementsByTagName("form")[0].insertBefore(bajar,lugar);
  	document.body.getElementsByTagName("form")[0].insertBefore(br,lugar);
 }
 
@@ -369,7 +386,48 @@ function borrarOpcion(id){
 		label[num].innerHTML = "Opcion " + numLabel + ": "
 		numLabel++
 	}
+}
 
+function subirOpcion(id){
+	//Variable inicial.
+	var nuevaPos = id - 1;
+
+	//Averiguamos que opcion se esta escojiendo. I si es la primera opcion no se ejecutara.
+	if(id != 0){
+
+		//Obtenemos los elementos con su id.
+		var input = document.getElementById('i'+id);
+		var input2 = document.getElementById('i'+nuevaPos);
+		
+		//Cojemos el valor de los inputs.
+		var valorInput = input.value;
+		var valorInput2 = input2.value;
+
+		//Cambiamos los valores de posicion;
+		input.value = valorInput2;
+		input2.value = valorInput;
+	}
+}
+
+function bajarOpcion(id){
+	//Variable inicial.
+	var nuevaPos = id + 1;
+
+	//Averiguamos que opcion se esta escojiendo. I si es la ultima opcion no se ejecutara.
+	if(id != numOpciones){
+
+		//Obtenemos los elementos con su id.
+		var input = document.getElementById('i'+id);
+		var input2 = document.getElementById('i'+nuevaPos);
+		
+		//Cojemos el valor de los inputs.
+		var valorInput = input.value;
+		var valorInput2 = input2.value;
+
+		//Cambiamos los valores de posicion;
+		input.value = valorInput2;
+		input2.value = valorInput;
+	}
 }
 
 function borrarTodasOpciones(){
@@ -379,6 +437,8 @@ function borrarTodasOpciones(){
 	var bBorrar = document.getElementsByClassName('borrarButtons');
 	var lBorrar = document.getElementsByClassName('lOpciones');
 	var brBorrar = document.getElementsByClassName('brOpciones');
+	var sBorrar = document.getElementsByClassName('subirButtons');
+	var uBorrar = document.getElementsByClassName('bajarButtons');
 	
 	//Borramos todos los elementos.
 	for(var num=0; num < numOpciones;num++){
@@ -387,6 +447,8 @@ function borrarTodasOpciones(){
 		bBorrar[0].parentNode.removeChild(bBorrar[0]);
 		lBorrar[0].parentNode.removeChild(lBorrar[0]);
 		brBorrar[0].parentNode.removeChild(brBorrar[0]);
+		sBorrar[0].parentNode.removeChild(sBorrar[0]);
+		uBorrar[0].parentNode.removeChild(uBorrar[0]);
 	}
 	
 	//Pone la variable a su valor inicial.
