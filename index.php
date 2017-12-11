@@ -22,7 +22,7 @@
 			<input type="password" name="password"/> <br>
 			<input class = "submit" type="submit" name="submitIniciar" value="Entrar"/>
 		</form>
-		<!--<input id="registrarse" type="submit" value="Registrarse" onclick="location.href='php/paginaUsuario.php'"/>-->
+		<input id="registrarse" type="submit" value="Registrarse" onclick="location.href='php/paginaUsuario.php'"/>
 	</div>
 
 </body>
