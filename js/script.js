@@ -8,6 +8,7 @@ function onload(){
 	//Desabilitar botones de Crear Opcion i Enviar Consulta al cargar la pagina.
 	enableDisable('crearO');
 	enableDisable('enviarC');
+	enableDisable('borrarO');
 }
 
 function validarConsulta(){
@@ -49,42 +50,52 @@ function validatFecha(dFinal, dInicial){
 	
 	//Obtenemos los elementos.
 	var fechaActual = new Date();
-	fechaActual.setHours(00);
-	fechaActual.setMinutes(00)
+	
+	//fechaActual.setHours(00);
+	//fechaActual.setMinutes(00)
 	fechaActual.setSeconds(00)
 	fechaActual.setMilliseconds(00)
-    var dia = fechaActual.getDate();
-	var mes = fechaActual.getMonth();
 	
 	//Separamos los distintos numero (dd/mm/yyyy) i los introducimos en una array.
 	dFinal = document.getElementById("fechaFinal").value.split("-");
+	hFinal = document.getElementById("horaFinal").value.split(":");
+	
 	dInicial = document.getElementById("fechaInicial").value.split("-");
+	hInicial = document.getElementById("horaInicial").value.split(":");
 	
 	//Obtenemos los valores de las arrays y passamos las variables a formato de fecha.
-	dFinal = new Date(parseInt(dFinal[0]),parseInt(dFinal[1]-1),parseInt(dFinal[2]));
-	dInicial = new Date(parseInt(dInicial[0]),parseInt(dInicial[1]-1),parseInt(dInicial[2]));
+	dFinal = new Date(parseInt(dFinal[0]),parseInt(dFinal[1]-1),parseInt(dFinal[2]),parseInt(hFinal[0]),parseInt(hFinal[1]));
+	dInicial = new Date(parseInt(dInicial[0]),parseInt(dInicial[1]-1),parseInt(dInicial[2]),parseInt(hInicial[0]),parseInt(hInicial[1]));
 	
 	//Calculamos la diferencia que hay entre las dos fechas.
 	var tiempoFecha = dFinal - dInicial;
 	
+	tiempoFecha = tiempoFecha / 3600;
+	
+	alert(tiempoFecha)
 	//Comparamos las fechas, si hay algun error muestra un mensaje con ese error i devuelve false, si no devuleve true.
-	alert(fechaActual + dInicial);
-	if(dInicial > fechaActual && dInicial < dFinal && tiempoFecha >= 1){
+	if(dInicial > fechaActual && dInicial < dFinal && tiempoFecha >= 4000){
 		return true;	
-	}else if(tiempoFecha == 0){
-		alert('Tiempo minimo 1 dia');
+	}else if(tiempoFecha < 4000 && tiempoFecha >= 0){
+		alert('Tiempo minimo 4 horas');
 		pintaRojo('fechaInicial');
 		pintaRojo('fechaFinal');
+		pintaRojo('horaInicial');
+		pintaRojo('horaFinal');
 	}else if(tiempoFecha < 0){
 		alert('El dia de cierre no puede ser menor que el de apertura');
 		pintaRojo('fechaFinal');
+		pintaRojo('horaFinal');
 	}else if(dInicial <= fechaActual){
 		alert('El dia ha de ser posterior al dia actual');
 		pintaRojo('fechaInicial');
+		pintaRojo('horaInicial');
 	}else{
 		alert('Formato Incorrecto');
 		pintaRojo('fechaInicial');
 		pintaRojo('fechaFinal');
+		pintaRojo('horaInicial');
+		pintaRojo('horaFinal');
 	}
 
 	return false;
@@ -148,13 +159,14 @@ function crearConsulta(){
 	var br = document.createElement("br");
 	var br2 = document.createElement("br");
 	var br3 = document.createElement("br");
+	var br4 = document.createElement("br");
 	
-	//Creamos el label de la fecha inicial.
+	//Creamos el label de la fecha inicial(dias).
 	var labelDataInici = document.createElement("label");
 	var textNodeLabelInici = document.createTextNode("Fecha de apertura: ");
 	labelDataInici.appendChild(textNodeLabelInici);
 	
-	//Creamos el input de la fecha inicail y le añadimos atributos.
+	//Creamos el input de la fecha inicial y le añadimos atributos(dias).
 	var inputDataInici = document.createElement("input");
 	inputDataInici.setAttribute('name','fechaInicial');
 	inputDataInici.setAttribute('class','fecha');
@@ -162,6 +174,20 @@ function crearConsulta(){
 	inputDataInici.setAttribute('type','date');
 	inputDataInici.setAttribute('onfocusin','colorLleno(this)');
 	inputDataInici.setAttribute('onfocusout','colorVacio(this)');
+	
+	//Creamos el label de la fecha inicial(horas).
+	var labelHoraInici = document.createElement("label");
+	var textNodeLabelHoraInici = document.createTextNode("Hora de apertura: ");
+	labelHoraInici.appendChild(textNodeLabelHoraInici);
+	
+	//Creamos el input de la fecha inicial y le añadimos atributos(horas).
+	var inputHoraInici = document.createElement("input");
+	inputHoraInici.setAttribute('name','fechaInicial');
+	inputHoraInici.setAttribute('class','fecha');
+	inputHoraInici.setAttribute('id','horaInicial');
+	inputHoraInici.setAttribute('type','time');
+	inputHoraInici.setAttribute('onfocusin','colorLleno(this)');
+	inputHoraInici.setAttribute('onfocusout','colorVacio(this)');
 	
 	//Creamos el label de la fecha final.
 	var labelDataFinal = document.createElement("label");
@@ -176,6 +202,20 @@ function crearConsulta(){
 	inputDataFinal.setAttribute('type','date');
 	inputDataFinal.setAttribute('class','fecha');
 	inputDataFinal.setAttribute('id','fechaFinal');
+	
+	//Creamos el label de la fecha final(horas).
+	var labelHoraFinal = document.createElement("label");
+	var textNodeLabelHoraFinal = document.createTextNode("Hora de cierre: ");
+	labelHoraFinal.appendChild(textNodeLabelHoraFinal);
+	
+	//Creamos el input de la fecha final y le añadimos atributos(horas).
+	var inputHoraFinal = document.createElement("input");
+	inputHoraFinal.setAttribute('name','fechaInicial');
+	inputHoraFinal.setAttribute('class','fecha');
+	inputHoraFinal.setAttribute('id','horaFinal');
+	inputHoraFinal.setAttribute('type','time');
+	inputHoraFinal.setAttribute('onfocusin','colorLleno(this)');
+	inputHoraFinal.setAttribute('onfocusout','colorVacio(this)');
 	
 	//Creamos un submit que ejecutara el formulario y le añadimos atributos.
 	var bsubmit = document.createElement('input');
@@ -200,11 +240,17 @@ function crearConsulta(){
 
 	formulario.appendChild(labelDataInici);
 	formulario.appendChild(inputDataInici);
+	formulario.appendChild(labelHoraInici);
+	formulario.appendChild(inputHoraInici);
+	
+	formulario.appendChild(br3);
 
 	formulario.appendChild(labelDataFinal);
 	formulario.appendChild(inputDataFinal);
+	formulario.appendChild(labelHoraFinal);
+	formulario.appendChild(inputHoraFinal);
 
-	formulario.appendChild(br3);
+	formulario.appendChild(br4);
 
 	formulario.appendChild(bsubmit);
 	
@@ -217,6 +263,7 @@ function crearConsulta(){
 	enableDisable('crearC');
 	enableDisable('crearO');
 	enableDisable('enviarC');
+	enableDisable('borrarO');
 
 
 }
@@ -264,6 +311,7 @@ function crearOpcion(){
 	//Creamos el br y le intoducimos atributos.
 	var br = document.createElement("br");
 	br.setAttribute('id','br'+numOpciones);
+	br.setAttribute('class','brOpciones');
 	
 	//Insertamos todos los elementos dentro del form, en la ultima posicion.
  	var lugar = document.getElementsByTagName("form")[0].lastElement;
@@ -322,7 +370,28 @@ function borrarOpcion(id){
 		numLabel++
 	}
 
-	habilitarConsulta();
+}
+
+function borrarTodasOpciones(){
+	
+	//Obtenemos los elementos con su id.
+	var iBorrar = document.getElementsByClassName('iOpciones');
+	var bBorrar = document.getElementsByClassName('borrarButtons');
+	var lBorrar = document.getElementsByClassName('lOpciones');
+	var brBorrar = document.getElementsByClassName('brOpciones');
+	
+	//Borramos todos los elementos.
+	for(var num=0; num < numOpciones;num++){
+		
+		iBorrar[0].parentNode.removeChild(iBorrar[0]);
+		bBorrar[0].parentNode.removeChild(bBorrar[0]);
+		lBorrar[0].parentNode.removeChild(lBorrar[0]);
+		brBorrar[0].parentNode.removeChild(brBorrar[0]);
+	}
+	
+	//Pone la variable a su valor inicial.
+	numOpciones = 0;
+
 }
 
 

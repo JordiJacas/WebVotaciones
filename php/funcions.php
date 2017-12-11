@@ -110,16 +110,16 @@
 				echo "<div  class = 'consulta' >";
 				echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarOpciones(this)'>".$consulta['descripcion']."</div>";
 				//ejecutem la funcio per obtenir les opciones de la conuçsulta.
-				//mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
+				mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
 				$consulta = $query->fetch();
 				echo "<form action='' method='post'><input type='submit' value='Editar'></form>";
 				echo "<form action='' method='post'><input type='submit' value='Borrar'></form>";
 				echo "<form action='' method='post'><input type='text'style='display:none'>";
-					//if($consulta[''] == false){
+					if($consulta[''] == false){
 						echo "<input type='submit' value='Activar'></form>";
-					//}else if($consulta[''] == true){
+					}else if($consulta[''] == true){
 						echo "<input type='submit' value='Desactivar'>";
-					//}
+					}
 				echo "<form action='' method='post'><input type='submit' value='Invitar'></form>";		
 				echo "</form>";
 				echo "</div>";

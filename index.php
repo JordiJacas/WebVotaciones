@@ -9,7 +9,7 @@
 <?php
 	include 'php/funcions.php';
 	$pdo = connectar();
-	//mostraUsuarios($pdo);
+	mostraUsuarios($pdo);
 
 
 ?>	
