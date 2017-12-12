@@ -11,8 +11,7 @@
 	include 'funcions.php';
 	$pdo = connectar();
 	
-	$idConsulta = $_POST['idConsulta'];
-	mostrarConsulta($pdo,$idConsulta,$row['id_user']);
+	echo(crearHash());
 ?>
 </body>
 </html>

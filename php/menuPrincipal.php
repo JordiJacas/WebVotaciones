@@ -32,11 +32,9 @@
 	</nav>
 		
 	<section>
-		
 		<?php
 			mostrarTodasConsultas($pdo,$row['id_user']);
 		?>
-		
 	</section>	
 </body>
 </html>

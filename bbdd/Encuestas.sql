@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Temps de generació: 04-12-2017 a les 19:45:36
--- Versió del servidor: 5.7.20-0ubuntu0.16.04.1
--- Versió de PHP: 7.0.22-0ubuntu0.16.04.1
+-- Tiempo de generación: 12-12-2017 a las 18:03:44
+-- Versión del servidor: 5.7.20-0ubuntu0.16.04.1
+-- Versión de PHP: 7.0.22-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de dades: `Encuestas`
+-- Base de datos: `Encuestas`
 --
 CREATE DATABASE IF NOT EXISTS `Encuestas` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `Encuestas`;
@@ -25,7 +25,7 @@ USE `Encuestas`;
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Consultas`
+-- Estructura de tabla para la tabla `Consultas`
 --
 
 CREATE TABLE `Consultas` (
@@ -37,7 +37,7 @@ CREATE TABLE `Consultas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Bolcant dades de la taula `Consultas`
+-- Volcado de datos para la tabla `Consultas`
 --
 
 INSERT INTO `Consultas` (`id_consulta`, `descripcion`, `id_admin`, `fechaInicial`, `fechaFinal`) VALUES
@@ -47,7 +47,7 @@ INSERT INTO `Consultas` (`id_consulta`, `descripcion`, `id_admin`, `fechaInicial
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Invitaciones`
+-- Estructura de tabla para la tabla `Invitaciones`
 --
 
 CREATE TABLE `Invitaciones` (
@@ -58,7 +58,7 @@ CREATE TABLE `Invitaciones` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Opciones`
+-- Estructura de tabla para la tabla `Opciones`
 --
 
 CREATE TABLE `Opciones` (
@@ -68,7 +68,7 @@ CREATE TABLE `Opciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Bolcant dades de la taula `Opciones`
+-- Volcado de datos para la tabla `Opciones`
 --
 
 INSERT INTO `Opciones` (`id_opcion`, `id_consulta`, `texto`) VALUES
@@ -81,31 +81,33 @@ INSERT INTO `Opciones` (`id_opcion`, `id_consulta`, `texto`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Usuarios`
+-- Estructura de tabla para la tabla `Usuarios`
 --
 
 CREATE TABLE `Usuarios` (
   `id_user` int(5) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
-  `email` varchar(30) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `isAdmin` int(1) NOT NULL DEFAULT '0',
-  `token` varchar(100) NOT NULL
+  `token` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Bolcant dades de la taula `Usuarios`
+-- Volcado de datos para la tabla `Usuarios`
 --
 
 INSERT INTO `Usuarios` (`id_user`, `nombre`, `apellido`, `email`, `password`, `isAdmin`, `token`) VALUES
-(1, 'Admin', 'General', 'admin@general.com', 'admingeneral', 1, ''),
-(2, 'public', 'general', 'public@gmail.com', 'public', 0, '');
+(1, 'Admin', 'General', 'admin@general.com', '55133c9aa03017a76fd569121c2aea86e981d43a', 1, ''),
+(2, 'public', 'general', 'public@gmail.com', '61c9b2b17db77a27841bbeeabff923448b0f6388', 0, ''),
+(3, 'Moises', 'Ortega', 'mortegarodriguez@iesesteveterradas.cat', '033614ceb3ae465f9ec6dccd19d3a918dd7ffd2b', 1, ''),
+(4, 'Antonio', 'Lopez', 'lopez@xtec.cat', '2c564424f11a1ae4ca64e5eeff9913b1b0f244c3', 0, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Votos`
+-- Estructura de tabla para la tabla `Votos`
 --
 
 CREATE TABLE `Votos` (
@@ -115,11 +117,20 @@ CREATE TABLE `Votos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Indexos per taules bolcades
+-- Volcado de datos para la tabla `Votos`
+--
+
+INSERT INTO `Votos` (`id_voto`, `id_opcion`, `id_user`) VALUES
+(1, 31, 2),
+(2, 32, 1),
+(3, 32, 3);
+
+--
+-- Índices para tablas volcadas
 --
 
 --
--- Index de la taula `Consultas`
+-- Indices de la tabla `Consultas`
 --
 ALTER TABLE `Consultas`
   ADD PRIMARY KEY (`id_consulta`),
@@ -128,27 +139,27 @@ ALTER TABLE `Consultas`
   ADD KEY `fechaFinal` (`fechaFinal`);
 
 --
--- Index de la taula `Invitaciones`
+-- Indices de la tabla `Invitaciones`
 --
 ALTER TABLE `Invitaciones`
   ADD PRIMARY KEY (`id_admin`,`id_consulta`),
   ADD KEY `consultasInvitaciones` (`id_consulta`);
 
 --
--- Index de la taula `Opciones`
+-- Indices de la tabla `Opciones`
 --
 ALTER TABLE `Opciones`
   ADD PRIMARY KEY (`id_opcion`),
   ADD KEY `id_consulta` (`id_consulta`) USING BTREE;
 
 --
--- Index de la taula `Usuarios`
+-- Indices de la tabla `Usuarios`
 --
 ALTER TABLE `Usuarios`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Index de la taula `Votos`
+-- Indices de la tabla `Votos`
 --
 ALTER TABLE `Votos`
   ADD PRIMARY KEY (`id_voto`),
@@ -156,54 +167,54 @@ ALTER TABLE `Votos`
   ADD KEY `id_user` (`id_user`);
 
 --
--- AUTO_INCREMENT per les taules bolcades
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT per la taula `Consultas`
+-- AUTO_INCREMENT de la tabla `Consultas`
 --
 ALTER TABLE `Consultas`
   MODIFY `id_consulta` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
--- AUTO_INCREMENT per la taula `Opciones`
+-- AUTO_INCREMENT de la tabla `Opciones`
 --
 ALTER TABLE `Opciones`
   MODIFY `id_opcion` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
--- AUTO_INCREMENT per la taula `Usuarios`
+-- AUTO_INCREMENT de la tabla `Usuarios`
 --
 ALTER TABLE `Usuarios`
-  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT per la taula `Votos`
+-- AUTO_INCREMENT de la tabla `Votos`
 --
 ALTER TABLE `Votos`
-  MODIFY `id_voto` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_voto` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- Restriccions per taules bolcades
+-- Restricciones para tablas volcadas
 --
 
 --
--- Restriccions per la taula `Consultas`
+-- Filtros para la tabla `Consultas`
 --
 ALTER TABLE `Consultas`
   ADD CONSTRAINT `admins` FOREIGN KEY (`id_admin`) REFERENCES `Usuarios` (`id_user`);
 
 --
--- Restriccions per la taula `Invitaciones`
+-- Filtros para la tabla `Invitaciones`
 --
 ALTER TABLE `Invitaciones`
   ADD CONSTRAINT `consultasInvitaciones` FOREIGN KEY (`id_consulta`) REFERENCES `Consultas` (`id_consulta`),
   ADD CONSTRAINT `userInvitaciones` FOREIGN KEY (`id_admin`) REFERENCES `Usuarios` (`id_user`);
 
 --
--- Restriccions per la taula `Opciones`
+-- Filtros para la tabla `Opciones`
 --
 ALTER TABLE `Opciones`
   ADD CONSTRAINT `consultas` FOREIGN KEY (`id_consulta`) REFERENCES `Consultas` (`id_consulta`);
 
 --
--- Restriccions per la taula `Votos`
+-- Filtros para la tabla `Votos`
 --
 ALTER TABLE `Votos`
   ADD CONSTRAINT `opciones` FOREIGN KEY (`id_opcion`) REFERENCES `Opciones` (`id_opcion`),

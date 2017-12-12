@@ -48,7 +48,7 @@
 				echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarConsultaSel(this)'>".$consulta['descripcion']."</div>";
 				//ejecutem la funcio per obtenir les opciones de la conuçsulta.
 				mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
-				echo "<form id='consulta".$consulta['id_consulta']."' action='prueba.php' method='post' style='display:none;'><input type='text' name='idConsulta' value='".$consulta['id_consulta']."'></form>";
+				echo "<form id='consulta".$consulta['id_consulta']."' action='consulta.php' method='post' style='display:none;'><input type='text' name='idConsulta' value='".$consulta['id_consulta']."'></form>";
 				$consulta = $query->fetch();
 				echo "</div>";
 			}
@@ -111,7 +111,7 @@
 			$opciones = $query->fetch();
 		}
 		echo "	<br><input class='votar' type='submit' name='votar' value='Votar'><br>
-				<input type='text' value='".$voto['id_voto']."' name='voto' style='display:none;'>
+				<input type='text' value='".$voto['id_voto']."' name='voto' style='display:inline;'>
 			</form>
 			</div>";
 		
@@ -121,6 +121,19 @@
 	}
 	
 	function mostrarResultados($pdo,$id_consulta,$id_user){
+		//executem la funcio i retornem la array amb tots els elements.
+		$query = $pdo->prepare("select * FROM VotosUsuario WHERE EXISTS (select * FROM Opciones WHERE id_consulta = ".$id_consulta.") and id_user = ".$id_user."");
+		$query->execute();
+		$opciones = $query->fetch();
+
+		return $opciones;
+
+		unset($pdo); 
+		unset($query);
+	}
+
+	//Funcion mostrar vieja
+	function mostrarResultados2($pdo,$id_consulta,$id_user){
 		//executem la funcio i retornem la array amb tots els elements.
 		$query = $pdo->prepare("select * FROM Votos WHERE EXISTS (select * FROM Opciones WHERE id_consulta = ".$id_consulta.") and id_user = ".$id_user."");
 		$query->execute();
@@ -177,5 +190,15 @@
 		$query->execute();
 		$votos = $query->fetch();
 		return $votos['COUNT(id_voto)'];
+	}
+
+	function crearHash($length = 25){		
+    	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    	$charactersLength = strlen($characters);
+    	$randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
 	}
 ?>

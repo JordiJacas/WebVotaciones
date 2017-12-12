@@ -7,7 +7,7 @@
 	//$contraseña = $_POST['password'];
 
 	//preparem i executem la consulta
-	$query = $pdo->prepare("INSERT INTO `Usuarios`(`nombre`, `apellido`, `email`, `password`) VALUES (:nombre, :apellido, :email, :password);");
+	$query = $pdo->prepare("INSERT INTO `Usuarios`(`nombre`, `apellido`, `email`, `password`) VALUES (:nombre, :apellido, :email, sha1(:password));");
 
 	$query->bindParam(':nombre', $_POST['nombre']);
 	$query->bindParam(':apellido', $_POST['apellido']);

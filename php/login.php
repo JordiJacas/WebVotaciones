@@ -8,7 +8,7 @@
 
 	
 	//preparem i executem la consulta
-	$query = $pdo->prepare("SELECT * FROM Usuarios WHERE nombre = :nombre and password = :password");
+	$query = $pdo->prepare("SELECT * FROM Usuarios WHERE nombre = :nombre and password = SHA1(:password)");
 
 	$query->bindParam(':nombre', $_POST['nombre']);
 	$query->bindParam(':password', $_POST['password']);
