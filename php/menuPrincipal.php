@@ -32,9 +32,13 @@
 	</nav>
 		
 	<section>
-		
+		<h2>Consultas Votadas</h2>
 		<?php
-			mostrarTodasConsultas($pdo,$row['id_user']);
+			mostrarTodasConsultas($pdo,$row['id_user'],true);
+		?>
+		<h2>Consultas Pendientes</h2>
+		<?php
+			mostrarTodasConsultas($pdo,$row['id_user'],false);
 		?>
 		
 	</section>	

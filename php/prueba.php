@@ -6,13 +6,12 @@
 <body>
 <?php
 	session_start();
-	$row = $_SESSION['row'];
+	//$row = $_SESSION['row'];
 	
 	include 'funcions.php';
 	$pdo = connectar();
 	
-	$idConsulta = $_POST['idConsulta'];
-	mostrarConsulta($pdo,$idConsulta,$row['id_user']);
+	mostrarTodasConsultas($pdo,1);
 ?>
 </body>
 </html>
