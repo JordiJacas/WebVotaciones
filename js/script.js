@@ -504,3 +504,9 @@ function mostrarOpciones(elemento){
 		document.getElementById('o'+ numId).className = 'opcionesOculto';
 	}
 }
+
+function mostrarConsultaSel(elem){
+	var idConsulta = "consulta"+elem.id;
+	var formConsulta = document.getElementById(idConsulta);
+	formConsulta.submit();
+}

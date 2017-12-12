@@ -8,7 +8,6 @@
 	<title>Web Votaciones</title>
 </head>
 <body id="snow">
-<audio src="../song/cascabeles.mp3" autoplay="true" loop="true"></audio>
 <?php
 	session_start();
 	include 'funcions.php';

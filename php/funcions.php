@@ -39,15 +39,16 @@
 		$hoy = getdate();
 		$fecha = $hoy['year'] ."-".$hoy['mon']."-".$hoy['mday'];
 
-		$query = $pdo->prepare("select * FROM Consultas WHERE fechaInicial <= '".$fecha."' AND fechaFinal < '".$fecha."'");
+		$query = $pdo->prepare("select * FROM Consultas WHERE fechaInicial <= '".$fecha."' AND fechaFinal >= '".$fecha."'");
 		$query->execute();
 		$consulta = $query->fetch();
 		//mostren el resultat de les consulta.
 			while($consulta){
 				echo "<div  class = 'consulta' >";
-				echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarOpciones(this)'>".$consulta['descripcion']."</div>";
+				echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarConsultaSel(this)'>".$consulta['descripcion']."</div>";
 				//ejecutem la funcio per obtenir les opciones de la conuçsulta.
 				mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
+				echo "<form id='consulta".$consulta['id_consulta']."' action='prueba.php' method='post' style='display:none;'><input type='text' name='idConsulta' value='".$consulta['id_consulta']."'></form>";
 				$consulta = $query->fetch();
 				echo "</div>";
 			}
@@ -56,6 +57,27 @@
 		unset($pdo); 
 		unset($query);
 	}
+	
+	function mostrarConsulta($pdo,$id_consulta,$id_user){
+
+		$query = $pdo->prepare("select * FROM Consultas WHERE id_consulta = ".$id_consulta."");
+		$query->execute();
+		$consulta = $query->fetch();
+		//mostren el resultat de les consulta.
+			while($consulta){
+				echo "<div  class = 'consulta' >";
+				echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarConsultaSel(this)'>".$consulta['descripcion']."</div>";
+				//ejecutem la funcio per obtenir les opciones de la conuçsulta.
+				mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
+				echo "<form id='consulta".$consulta['id_consulta']."' action='consulta.php' method='post' style='display:none;'><input type='text' name='idConsulta' value='".$consulta['id_consulta']."'></form>";
+				$consulta = $query->fetch();
+				echo "</div>";
+			}
+		
+		//eliminem els objectes per alliberar memòria 
+		unset($pdo); 
+		unset($query);
+		}
 
 	function mostrarOpciones($pdo,$id_consulta,$id_user){
 		$query = $pdo->prepare("select * FROM Opciones WHERE id_consulta = ".$id_consulta."");
@@ -84,6 +106,7 @@
 				echo "<input type='radio' name='respuesta' value='".$opciones['id_opcion']."'>".$opciones['texto']."";
 				echo $mostrarVotos;
 			}
+			echo "<br>";
 			
 			$opciones = $query->fetch();
 		}
@@ -109,34 +132,34 @@
 		unset($query);
 	}
 
-	function mostrarConsultasUsuario($pdo,$id_user){
-		$query = $pdo->prepare("select * FROM Consultas Where id_admin = ".$id_user."");
-		$query->execute();
-		$consulta = $query->fetch();
+	// function mostrarConsultasUsuario($pdo,$id_user){
+		// $query = $pdo->prepare("select * FROM Consultas Where id_admin = ".$id_user."");
+		// $query->execute();
+		// $consulta = $query->fetch();
 		//mostren el resultat de les consulta.
-			while($consulta){
-				echo "<div  class = 'consulta' >";
-				echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarOpciones(this)'>".$consulta['descripcion']."</div>";
-				//ejecutem la funcio per obtenir les opciones de la conuçsulta.
-				mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
-				$consulta = $query->fetch();
-				echo "<form action='' method='post'><input type='submit' value='Editar'></form>";
-				echo "<form action='' method='post'><input type='submit' value='Borrar'></form>";
-				echo "<form action='' method='post'><input type='text'style='display:none'>";
-					if($consulta[''] == false){
-						echo "<input type='submit' value='Activar'></form>";
-					}else if($consulta[''] == true){
-						echo "<input type='submit' value='Desactivar'>";
-					}
-				echo "<form action='' method='post'><input type='submit' value='Invitar'></form>";		
-				echo "</form>";
-				echo "</div>";
-			}
+			// while($consulta){
+				// echo "<div  class = 'consulta' >";
+				// echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarOpciones(this)'>".$consulta['descripcion']."</div>";
+				//ejecutem la funcio per obtenir les opciones de la conusulta.
+				// mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
+				// $consulta = $query->fetch();
+				// echo "<form action='' method='post'><input type='submit' value='Editar'></form>";
+				// echo "<form action='' method='post'><input type='submit' value='Borrar'></form>";
+				// echo "<form action='' method='post'><input type='text'style='display:none'>";
+					// if($consulta[''] == false){
+						// echo "<input type='submit' value='Activar'></form>";
+					// }else if($consulta[''] == true){
+						// echo "<input type='submit' value='Desactivar'>";
+					// }
+				// echo "<form action='' method='post'><input type='submit' value='Invitar'></form>";		
+				// echo "</form>";
+				// echo "</div>";
+			// }
 		
 		//eliminem els objectes per alliberar memòria 
-		unset($pdo); 
-		unset($query);
-	}
+		// unset($pdo); 
+		// unset($query);
+	// }
 
 	function todosUsuarios($pdo,$id_user){
 		$query = $pdo->prepare("select * FROM Usuarios Where id_user != ".$id_user."");
