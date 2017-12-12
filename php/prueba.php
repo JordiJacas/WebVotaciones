@@ -6,12 +6,11 @@
 <body>
 <?php
 	session_start();
-	$row = $_SESSION['row'];
+	//$row = $_SESSION['row'];
 	
 	include 'funcions.php';
 	$pdo = connectar();
-	
-	echo(crearHash());
+
 ?>
 </body>
 </html>

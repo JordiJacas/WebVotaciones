@@ -35,24 +35,49 @@
 	}
 
 	
-	function mostrarTodasConsultas($pdo,$id_user){
+	function mostrarTodasConsultas($pdo,$id_user,$boolean){
 		$hoy = getdate();
 		$fecha = $hoy['year'] ."-".$hoy['mon']."-".$hoy['mday'];
 
 		$query = $pdo->prepare("select * FROM Consultas WHERE fechaInicial <= '".$fecha."' AND fechaFinal >= '".$fecha."'");
 		$query->execute();
 		$consulta = $query->fetch();
+
 		//mostren el resultat de les consulta.
 			while($consulta){
-				echo "<div  class = 'consulta' >";
-				echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarConsultaSel(this)'>".$consulta['descripcion']."</div>";
-				//ejecutem la funcio per obtenir les opciones de la conuçsulta.
-				mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
-				echo "<form id='consulta".$consulta['id_consulta']."' action='consulta.php' method='post' style='display:none;'><input type='text' name='idConsulta' value='".$consulta['id_consulta']."'></form>";
+				$votado = votado($pdo,$consulta['id_consulta'],$id_user);
+
+				if($votado == $boolean){
+					echo "<div  class = 'consulta' >";
+				
+					echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarConsultaSel(this)'>".$consulta['descripcion']."</div>";
+					//ejecutem la funcio per obtenir les opciones de la conuçsulta.
+					mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
+					echo "<form id='consulta".$consulta['id_consulta']."' action='consulta.php' method='post' style='display:none;'><input type='text' name='idConsulta' value='".$consulta['id_consulta']."'></form>";
+					echo "</div>";
+				}
+				
 				$consulta = $query->fetch();
-				echo "</div>";
+				
 			}
 		
+		//eliminem els objectes per alliberar memòria 
+		unset($pdo); 
+		unset($query);
+	}
+
+	function votado($pdo,$consulta,$id_user){
+		$query = $pdo->prepare("select * FROM Opciones WHERE id_consulta = ".$consulta." AND EXISTS (select * FROM Votos WHERE id_user = ".$id_user.")");
+		$query->execute();
+		$votado = $query->fetch();
+
+		if(count($votado) <= 1){
+			return false;
+		} else if(count($votado) > 1){
+			return true;
+		}
+
+
 		//eliminem els objectes per alliberar memòria 
 		unset($pdo); 
 		unset($query);

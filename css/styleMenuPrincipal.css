@@ -3,6 +3,12 @@ section a{
 	color: #000;
 }
 
+section h2{
+	position: relative;
+	left: 33%;
+	margin-top: 5%;
+}
+
 .consulta{
 	position: relative;
 	height: auto;
