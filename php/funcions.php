@@ -53,7 +53,7 @@
 					echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarConsultaSel(this)'>".$consulta['descripcion']."</div>";
 					//ejecutem la funcio per obtenir les opciones de la conuçsulta.
 					mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
-					echo "<form id='consulta".$consulta['id_consulta']."' action='prueba.php' method='post' style='display:none;'><input type='text' name='idConsulta' value='".$consulta['id_consulta']."'></form>";
+					echo "<form id='consulta".$consulta['id_consulta']."' action='consulta.php' method='post' style='display:none;'><input type='text' name='idConsulta' value='".$consulta['id_consulta']."'></form>";
 					echo "</div>";
 				}
 				
