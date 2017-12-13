@@ -11,10 +11,20 @@
 	include 'funcions.php';
 	$pdo = connectar();
 	mostraUsuarios($pdo);
+
+	if(isset($_GET['token'])){
+		$token = $_GET['token'];
+		$url = "crearUsuario.php?token=".$token."";
+
+	}else if(!isset($_GET['token'])){
+		$url = "crearUsuario.php";	
+	}
 ?>	
 	<div>
 		<h1>Registrarse</h1>
-		<form action="../php/crearUsuario.php" method="POST">
+		<?php
+			echo "<form action='".$url."'' method='post'>";
+		?>
 			<label>Nombre: </label> <br>
 			<input type="text" name="nombre"/> <br> <br>
 			<label>Apellido: </label> <br>

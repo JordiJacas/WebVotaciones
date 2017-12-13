@@ -11,7 +11,13 @@
 	$pdo = connectar();
 	mostraUsuarios($pdo);
 
+	if(isset($_GET['token'])){
+		$token = $_GET['token'];
+		$url = "'php/paginaUsuario.php?token=".$token."'";
 
+	}else if(!isset($_GET['token'])){
+		$url = "'php/paginaUsuario.php'";	
+	}
 ?>	
 	<div>
 		<h1>Iniciar Session</h1>
@@ -22,7 +28,12 @@
 			<input type="password" name="password"/> <br>
 			<input class = "submit" type="submit" name="submitIniciar" value="Entrar"/>
 		</form>
-		<input id="registrarse" type="submit" value="Registrarse" onclick="location.href='php/paginaUsuario.php'"/>
+		<input id="registrarse" type="submit" value="Registrarse" onclick="location.href=
+		<?php
+			echo $url;
+		?>
+		"/>
+		
 	</div>
 
 </body>

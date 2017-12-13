@@ -3,8 +3,16 @@
 	include 'funcions.php';
 	$pdo = connectar();
 	
-	//$nombre = $_POST['nombre'];
-	//$contraseña = $_POST['password'];
+
+	// $query = $pdo->prepare("SELECT * FROM Usuarios WHERE token = ':token' AND email = ':email'");
+
+	// $query->bindParam(':token', $_GET['token']);
+
+	// $query->execute();
+	// $comprovar = $query->fetch();
+
+
+	// print_r($comprovar);
 
 	//preparem i executem la consulta
 	$query = $pdo->prepare("INSERT INTO `Usuarios`(`nombre`, `apellido`, `email`, `password`) VALUES (:nombre, :apellido, :email, sha1(:password));");
@@ -17,7 +25,6 @@
 	$query->execute();
 	$row = $query->fetch();
 	
-	//if ($row['password'] == $contraseña and $row['nombre'] == $nombre){
 	if ($row){
 		
 		$_SESSION['row'] = $row;
