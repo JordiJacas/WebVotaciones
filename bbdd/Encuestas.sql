@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 12-12-2017 a las 18:03:44
+-- Tiempo de generación: 14-12-2017 a las 18:52:25
 -- Versión del servidor: 5.7.20-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.22-0ubuntu0.16.04.1
 
@@ -42,7 +42,8 @@ CREATE TABLE `Consultas` (
 
 INSERT INTO `Consultas` (`id_consulta`, `descripcion`, `id_admin`, `fechaInicial`, `fechaFinal`) VALUES
 (31, 'Consulta 1', 1, '2017-12-05', '2017-12-12'),
-(32, 'Prueba apertura', 1, '2017-12-03', '2017-12-08');
+(32, 'Prueba apertura', 1, '2017-12-03', '2017-12-08'),
+(33, 'Blanco o negro?', 1, '2017-12-11', '2018-01-10');
 
 -- --------------------------------------------------------
 
@@ -76,7 +77,9 @@ INSERT INTO `Opciones` (`id_opcion`, `id_consulta`, `texto`) VALUES
 (30, 31, 'Opcion 2'),
 (31, 32, 'Opcion 1'),
 (32, 32, 'Opcion 2'),
-(33, 32, 'Opcion 3');
+(33, 32, 'Opcion 3'),
+(34, 33, 'Blanco'),
+(35, 33, 'Negro');
 
 -- --------------------------------------------------------
 
@@ -107,23 +110,26 @@ INSERT INTO `Usuarios` (`id_user`, `nombre`, `apellido`, `email`, `password`, `i
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Votos`
+-- Estructura de tabla para la tabla `VotosOpcion`
 --
 
-CREATE TABLE `Votos` (
-  `id_voto` int(5) NOT NULL,
+CREATE TABLE `VotosOpcion` (
+  `id_voto` int(11) NOT NULL,
   `id_opcion` int(5) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `hash` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `Votos`
+-- Estructura de tabla para la tabla `VotosUsuario`
 --
 
-INSERT INTO `Votos` (`id_voto`, `id_opcion`, `id_user`) VALUES
-(1, 31, 2),
-(2, 32, 1),
-(3, 32, 3);
+CREATE TABLE `VotosUsuario` (
+  `id_voto` int(5) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `hash_enc` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Índices para tablas volcadas
@@ -159,11 +165,17 @@ ALTER TABLE `Usuarios`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Indices de la tabla `Votos`
+-- Indices de la tabla `VotosOpcion`
 --
-ALTER TABLE `Votos`
+ALTER TABLE `VotosOpcion`
   ADD PRIMARY KEY (`id_voto`),
-  ADD KEY `id_opcion` (`id_opcion`) USING BTREE,
+  ADD KEY `id_opcion` (`id_opcion`);
+
+--
+-- Indices de la tabla `VotosUsuario`
+--
+ALTER TABLE `VotosUsuario`
+  ADD PRIMARY KEY (`id_voto`),
   ADD KEY `id_user` (`id_user`);
 
 --
@@ -174,22 +186,27 @@ ALTER TABLE `Votos`
 -- AUTO_INCREMENT de la tabla `Consultas`
 --
 ALTER TABLE `Consultas`
-  MODIFY `id_consulta` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_consulta` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT de la tabla `Opciones`
 --
 ALTER TABLE `Opciones`
-  MODIFY `id_opcion` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_opcion` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT de la tabla `Usuarios`
 --
 ALTER TABLE `Usuarios`
   MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT de la tabla `Votos`
+-- AUTO_INCREMENT de la tabla `VotosOpcion`
 --
-ALTER TABLE `Votos`
-  MODIFY `id_voto` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `VotosOpcion`
+  MODIFY `id_voto` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `VotosUsuario`
+--
+ALTER TABLE `VotosUsuario`
+  MODIFY `id_voto` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- Restricciones para tablas volcadas
 --
@@ -214,10 +231,15 @@ ALTER TABLE `Opciones`
   ADD CONSTRAINT `consultas` FOREIGN KEY (`id_consulta`) REFERENCES `Consultas` (`id_consulta`);
 
 --
--- Filtros para la tabla `Votos`
+-- Filtros para la tabla `VotosOpcion`
 --
-ALTER TABLE `Votos`
-  ADD CONSTRAINT `opciones` FOREIGN KEY (`id_opcion`) REFERENCES `Opciones` (`id_opcion`),
+ALTER TABLE `VotosOpcion`
+  ADD CONSTRAINT `opcion` FOREIGN KEY (`id_opcion`) REFERENCES `Opciones` (`id_opcion`);
+
+--
+-- Filtros para la tabla `VotosUsuario`
+--
+ALTER TABLE `VotosUsuario`
   ADD CONSTRAINT `usuario` FOREIGN KEY (`id_user`) REFERENCES `Usuarios` (`id_user`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
