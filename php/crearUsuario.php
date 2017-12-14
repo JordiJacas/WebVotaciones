@@ -3,35 +3,65 @@
 	include 'funcions.php';
 	$pdo = connectar();
 	
-
-	// $query = $pdo->prepare("SELECT * FROM Usuarios WHERE token = ':token' AND email = ':email'");
-
-	// $query->bindParam(':token', $_GET['token']);
-
-	// $query->execute();
-	// $comprovar = $query->fetch();
-
-
-	// print_r($comprovar);
-
-	//preparem i executem la consulta
-	$query = $pdo->prepare("INSERT INTO `Usuarios`(`nombre`, `apellido`, `email`, `password`) VALUES (:nombre, :apellido, :email, sha1(:password));");
-
-	$query->bindParam(':nombre', $_POST['nombre']);
-	$query->bindParam(':apellido', $_POST['apellido']);
-	$query->bindParam(':email', $_POST['email']);
-	$query->bindParam(':password', $_POST['password']);
-
-	$query->execute();
-	$row = $query->fetch();
 	
-	if ($row){
+	$email = $_POST['email'];
+	$nombre = $_POST['nombre'];
+	$apellido = $_POST['apellido'];
+	$password = $_POST['password'];
+
+
+	if(isset($_GET['token'])){
+		$token = $_GET['token'];
+
+	}else if(!isset($_GET['token'])){
+		$token = null;
+	}
+	
+	$query = $pdo->prepare("SELECT * FROM Usuarios WHERE token = '".$token."' AND email = '".$email."'");
+	$query->execute();
+	$comprovar = $query->fetch();
+
+
+	if(count($comprovar)>1){
+		if($comprovar['nombre'] == null && $comprovar['apellido']== null && $comprovar['isAdmin'] == 1){
+
+			$query = $pdo->prepare("UPDATE Usuarios SET nombre='".$nombre."', apellido='".$apellido."', password=sha1('".$password."'), token = null WHERE token = '".$token."' AND email = '".$email."'");
+
+			$query->execute();
+			$row = $query->fetch();
+
+			if ($row){
+				
+				$_SESSION['row'] = $row;
+				//header('Location: http://localhost/WebVotaciones/php/menuPrincipal.php');
+				
+			}else{
+				//header('Location: http://localhost/WebVotaciones');
+			}
+		}else{
+			echo "<script>alert('El correo ya existe')</script>";
+		}
+	}else if(count($comprovar)<=1){
 		
-		$_SESSION['row'] = $row;
-		header('Location: http://localhost/WebVotaciones/php/menuPrincipal.php');
+		$email = $_POST['email'];
+		$nombre = $_POST['nombre'];
+		$apellido = $_POST['apellido'];
+		$password = $_POST['password'];
+		//preparem i executem la consulta
+		$query = $pdo->prepare("INSERT INTO `Usuarios`(`nombre`, `apellido`, `email`, `password`) VALUES ('".$nombre."', '".$apellido."', '".$email."', sha1('".$password."'));");
+
+		$query->execute();
+		$row = $query->fetch();
+		print_r($query);
 		
-	}else{
-		header('Location: http://localhost/WebVotaciones');
+		if ($row){
+			
+			$_SESSION['row'] = $row;
+			//header('Location: http://localhost/WebVotaciones/php/menuPrincipal.php');
+			
+		}else{
+			//header('Location: http://localhost/WebVotaciones');
+		}
 	}
 	
 	//eliminem els objectes per alliberar memòria 

@@ -7,6 +7,7 @@
 	<meta charset="utf-8">
 	<title>Web Votaciones</title>
 </head>
+
 <body id="snow">
 <?php
 	session_start();
@@ -15,7 +16,7 @@
 	
 	$row = $_SESSION['row'];
 ?>
-	<nav>
+<!-- 	<nav>
 		<img src="../img/logo.png" id="logo">
 		<ul>
 			<li><a href="menuPrincipal.php" >Inicio</a></li>
@@ -28,17 +29,18 @@
 		</ul>
 		<p><?php echo $row['nombre'] . " " . $row['apellido']; ?></p>
 		<a id = "lLogout" href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
-	</nav>
-		
+	</nav> -->
 	<section>
-		<h2>Consultas Votadas</h2>
-		<?php
-			mostrarTodasConsultas($pdo,$row['id_user'],true);
-		?>
-		<h2>Consultas Pendientes</h2>
-		<?php
-			mostrarTodasConsultas($pdo,$row['id_user'],false);
-		?>
-	</section>	
+		<form action='email.php' method='post'>
+				<label>Emails: </label>
+				<textarea name='email'></textarea>
+				<br>
+				<input type='submit' value='invitar'>
+				<select name='idConsulta'>
+					<?php invitarSelect($pdo,$row['id_user']);?>
+				<select>
+		</form>
+	<section>	
+
 </body>
 </html>

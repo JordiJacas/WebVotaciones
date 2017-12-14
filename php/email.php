@@ -1,26 +1,40 @@
 <?php
+	include "funcions.php";
+	$pdo = connectar();
 	$titulo = 'Invitacion a consulta';
-	$email = $_POST['email'];//'jjacasventura@iesesteveterradas.cat';
+	$email = $_POST['email'];
+	$id_consulta = $_POST['idConsulta'];
+
+	echo $id_consulta;
 
 	$email = explode("\n", $email);
 
-	for($num = 0; $num <count($email); $num++){
+	//for($num = 0; $num <count($email); $num++){
 		$token = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());
 
-		//preparem i executem la consulta
-		$query = $pdo->prepare("insert into Usuarios (email,isAdmin,token) values ('".$email[$num]."',0,'".$token."')");
+		$query = $pdo->prepare("SELECT count(id_user) FROM Usuarios WHERE email = 'jjacas@es.com'");
 		$query->execute();
+		$numUser = $query->fetch();
 
-		$query = $pdo->prepare("Select id_user from Usuarios Where token = '".$token."' AND email = '".$email[$num]."')");
+		//preparem i executem la consulta
+		if($numUser = 0){
+			$query = $pdo->prepare("INSERT into Usuarios (email,isAdmin,token) values ('jjacas@es.com',0,'abcd234')");
+			$query->execute();
+		}else if ($numUser = 1){
+			$query = $pdo->prepare("UPDATE Usuarios set token = '".$token."' WHERE email = '".$email[$num]."'");
+			$query->execute();
+		}
+
+		$query = $pdo->prepare("SELECT * FROM Usuarios WHERE token = '".$token."' AND email = '".$email[$num]."'");
 		$query->execute();
 		$usuario = $query->fetch();
 
-		$query = $pdo->prepare("insert into Invitaciones (id_consulta, id_user) values ("..",".$usuario['id_user'].")");
+		$query = $pdo->prepare("INSERT into Invitaciones (id_admin,id_consulta) values (".$usuario['id_user'].",".$id_consulta.")");
 		$query->execute();
 		
 		$usuario = $query->fetch();
 		
 		$mensaje = "http://localhost/WebVotaciones/?token=".$token;
 		//mail($email[num], $titulo, $mensaje);
-	}
+	//}
 ?>

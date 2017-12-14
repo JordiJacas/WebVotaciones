@@ -39,7 +39,7 @@
 		$hoy = getdate();
 		$fecha = $hoy['year'] ."-".$hoy['mon']."-".$hoy['mday'];
 
-		$query = $pdo->prepare("select * FROM Consultas WHERE fechaInicial <= '".$fecha."' AND fechaFinal >= '".$fecha."'");
+		$query = $pdo->prepare("SELECT * FROM Consultas WHERE fechaInicial <= '".$fecha."' AND fechaFinal >= '".$fecha."'");
 		$query->execute();
 		$consulta = $query->fetch();
 
@@ -136,7 +136,7 @@
 			$opciones = $query->fetch();
 		}
 		echo "	<br><input class='votar' type='submit' name='votar' value='Votar'><br>
-				<input type='text' value='".$voto['id_voto']."' name='voto' style='display:inline;'>
+				<input type='text' value='".$voto['id_voto']."' name='voto' style='display:none;'>
 			</form>
 			</div>";
 		
@@ -170,35 +170,6 @@
 		unset($query);
 	}
 
-	// function mostrarConsultasUsuario($pdo,$id_user){
-		// $query = $pdo->prepare("select * FROM Consultas Where id_admin = ".$id_user."");
-		// $query->execute();
-		// $consulta = $query->fetch();
-		//mostren el resultat de les consulta.
-			// while($consulta){
-				// echo "<div  class = 'consulta' >";
-				// echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarOpciones(this)'>".$consulta['descripcion']."</div>";
-				//ejecutem la funcio per obtenir les opciones de la conusulta.
-				// mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
-				// $consulta = $query->fetch();
-				// echo "<form action='' method='post'><input type='submit' value='Editar'></form>";
-				// echo "<form action='' method='post'><input type='submit' value='Borrar'></form>";
-				// echo "<form action='' method='post'><input type='text'style='display:none'>";
-					// if($consulta[''] == false){
-						// echo "<input type='submit' value='Activar'></form>";
-					// }else if($consulta[''] == true){
-						// echo "<input type='submit' value='Desactivar'>";
-					// }
-				// echo "<form action='' method='post'><input type='submit' value='Invitar'></form>";		
-				// echo "</form>";
-				// echo "</div>";
-			// }
-		
-		//eliminem els objectes per alliberar memòria 
-		// unset($pdo); 
-		// unset($query);
-	// }
-
 	function todosUsuarios($pdo,$id_user){
 		$query = $pdo->prepare("select * FROM Usuarios Where id_user != ".$id_user."");
 		$query->execute();
@@ -225,5 +196,21 @@
 	        $randomString .= $characters[rand(0, $charactersLength - 1)];
 	    }
 	    return $randomString;
+	}
+
+	function invitarSelect($pdo,$idAdmin){
+		  //preparem i executem la consulta
+		  $query = $pdo->prepare("select * FROM Consultas Where id_admin = ".$idAdmin."");
+		  $query->execute();
+
+		  $row = $query->fetch();
+		  while ( $row ) {
+		    echo "<option value='".$row['id_consulta']."'>".$row['descripcion']."</option>";
+		    $row = $query->fetch();
+		  }
+
+		  //eliminem els objectes per alliberar memòria 
+		  unset($pdo); 
+		  unset($query);
 	}
 ?>

@@ -18,9 +18,8 @@
 		<img src="../img/logo.png" id="logo">
 		<ul>
 			<li><a href="menuPrincipal.php" >Inicio</a></li>
-			<!--<li><a>Crear Usuario</a></li>
-			<li><a>Mis Consultas</a></li>-->
 			<li><a href="crearConsulta.php" >Crear Consultas</a></li>
+			echo "<li><a href='InvitarConsulta.php' >Invitar</a></li>";
 		</ul>
 		<p><?php echo $row['nombre'] . " " . $row['apellido']; ?></p>
 		<a id = "lLogout" href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
