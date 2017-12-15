@@ -362,7 +362,7 @@ function eSubmit(){
 
 function borrarOpcion(id){
 	//Variable inicial.
-	var numLabel = 1;
+	var numId = 1;
 	
 	//Obtenemos los elementos con su id.
 	var iBorrar = document.getElementById('i'+id)
@@ -385,17 +385,40 @@ function borrarOpcion(id){
 	
 	//cambiaos el texto que contienen los label de cada input.
 	var label = document.getElementsByClassName('lOpciones');
+	var input = document.getElementsByClassName('iOpciones');
+	var boton = document.getElementsByClassName('borrarButtons');
+	var br = document.getElementsByClassName('brOpciones');
+	var subir = document.getElementsByClassName('subirButtons');
+	var bajar = document.getElementsByClassName('bajarButtons');
 	
-	for(var num=0; num<label.length;num++){
-		label[num].innerHTML = "Opcion " + numLabel + ": "
-		numLabel++
+	for(var num=0; num<numOpciones;num++){
+		label[num].innerHTML = "Opcion " + numId + ": ";
+		label[num].id = "l"+numId;
+		input[num].id = "i" + numId;
+		
+		boton[num].id = "b" + numId;
+		boton[num].removeAttribute("onclick");
+		boton[num].setAttribute("onclick","borrarOpcion("+numId+")");
+		
+		br[num].id = "br" + numId;
+		
+		subir[num].id = "s" + numId;
+		subir[num].removeAttribute("onclick");
+		subir[num].setAttribute("onclick","subirOpcion("+numId+")");
+		
+		bajar[num].id = "u" + numId;
+		bajar[num].removeAttribute("onclick");
+		bajar[num].setAttribute("onclick","bajarOpcion("+numId+")");
+		
+		numId++
 	}
+	
+
 }
 
 function subirOpcion(id){
 	//Variable inicial.
 	var nuevaPos = id - 1;
-
 
 	//Obtenemos los elementos con su id.
 	var input = document.getElementById('i'+id);

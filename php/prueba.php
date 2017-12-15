@@ -10,6 +10,8 @@
 	
 	include 'funcions.php';
 	$pdo = connectar();
+	
+	mostrarTodasConsultas($pdo,1,false);
 
 ?>
 </body>
