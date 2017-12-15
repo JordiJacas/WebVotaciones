@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include "funcions.php";
+
 	$respuesta = $_POST['respuesta'];
 	$id_voto = $_POST['voto'];
 	$contador = 0;
@@ -17,16 +18,17 @@
 
 	if($votos == null){
 		//preparem i executem la consulta
-		$query = $pdo->prepare("insert into VotosUsuario (id_user, hash_enc) values (".$row['id_user'].",AES_ENCRYPT(".$hash.",'".$row['password']."'))");
+		$query = $pdo->prepare("Insert into VotosUsuario (id_user, hash_enc) values (".$row['id_user'].",
+			AES_ENCRYPT('".$hash."','".$row['password']."'))");
 		$query->execute();
 		print_r($query);
 
-		$query2 = $pdo->prepare("insert into VotosOpcion (id_opcion, hash) values (".$respuesta.",".$hash.")");
+		$query2 = $pdo->prepare("insert into VotosOpcion (id_opcion, hash) values (".$respuesta.",'".$hash."')");
 		$query2->execute();
 		print_r($query2);
-
+		
 	}else {
-		$query = $pdo->prepare("update VotosOpcion set id_opcion=".$respuesta." WHERE hash = (SELECT AES_DESCRYPT(hash_enc) FROM VotosUsuario WHERE id_voto = ".$id_voto.")");
+		$query = $pdo->prepare("update VotosOpcion set id_opcion=".$respuesta." WHERE hash = (SELECT AES_DECRYPT(hash_enc,'".$row['password']."') FROM VotosUsuario WHERE id_voto = ".$id_voto.")");
 		$query->execute();
 		print_r($query);
 	}
@@ -34,5 +36,5 @@
 	//eliminem els objectes per alliberar memòria 
 	unset($pdo); 
 	unset($query);
-	//header('Location: http://localhost/WebVotaciones/php/menuPrincipal.php');
+	header('Location: http://localhost/WebVotaciones/php/menuPrincipal.php');
 ?>

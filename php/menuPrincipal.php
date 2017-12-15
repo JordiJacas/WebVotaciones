@@ -33,11 +33,11 @@
 	<section>
 		<h2>Consultas Votadas</h2>
 		<?php
-			mostrarTodasConsultas($pdo,$row['id_user'],true);
+			mostrarTodasConsultas($pdo,$row['id_user'],true,$row['password']);
 		?>
 		<h2>Consultas Pendientes</h2>
 		<?php
-			mostrarTodasConsultas($pdo,$row['id_user'],false);
+			mostrarTodasConsultas($pdo,$row['id_user'],false,$row['password']);
 		?>
 	</section>	
 </body>

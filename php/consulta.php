@@ -29,7 +29,7 @@
 		<a id = "lLogout" href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
 	</nav> -->
 <?php
-	mostrarConsulta($pdo,$idConsulta,$row['id_user']);
+	mostrarConsulta($pdo,$idConsulta,$row['id_user'],$row['password']);
 ?>
 </body>
 </html>

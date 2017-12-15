@@ -35,7 +35,7 @@
 	}
 
 	
-	function mostrarTodasConsultas($pdo,$id_user,$boolean){
+	function mostrarTodasConsultas($pdo,$id_user,$boolean, $password){
 		$hoy = getdate();
 		$fecha = $hoy['year'] ."-".$hoy['mon']."-".$hoy['mday'];
 
@@ -52,7 +52,7 @@
 					echo "<div  class = 'consulta' >";
 					echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarConsultaSel(this)'>".$consulta['descripcion']."</div>";
 					//ejecutem la funcio per obtenir les opciones de la conuçsulta.
-					mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
+					mostrarOpciones($pdo,$consulta['id_consulta'],$id_user,$password);
 					echo "<form id='consulta".$consulta['id_consulta']."' action='consulta.php' method='post' style='display:none;'><input type='text' name='idConsulta' value='".$consulta['id_consulta']."'></form>";
 					echo "</div>";
 					
@@ -66,7 +66,7 @@
 	}
 	
 	function votado($pdo,$consulta,$id_user){
-		$query = $pdo->prepare("select * FROM Opciones WHERE id_consulta = ".$consulta." AND id_opcion = (select id_opcion FROM Votos WHERE id_user = ".$id_user.")");
+		$query = $pdo->prepare("select * FROM Opciones WHERE id_consulta = ".$consulta." AND id_opcion = (select vo.id_opcion FROM VotosOpcion vo, VotosUsuario vu WHERE vu.id_user = ".$id_user.")");
 		$query->execute();
 		$votado = $query->fetch();
 		if(count($votado) <= 1){
@@ -97,7 +97,7 @@
 		unset($query);
 	}
 	
-	function mostrarConsulta($pdo,$id_consulta,$id_user){
+	function mostrarConsulta($pdo,$id_consulta,$id_user,$password){
 
 		$query = $pdo->prepare("select * FROM Consultas WHERE id_consulta = ".$id_consulta."");
 		$query->execute();
@@ -107,7 +107,7 @@
 				echo "<div  class = 'consulta' >";
 				echo "<div class = 'descripcion' id='".$consulta['id_consulta']."' onclick='mostrarConsultaSel(this)'>".$consulta['descripcion']."</div>";
 				//ejecutem la funcio per obtenir les opciones de la conuçsulta.
-				mostrarOpciones($pdo,$consulta['id_consulta'],$id_user);
+				mostrarOpciones($pdo,$consulta['id_consulta'],$id_user,$password);
 				echo "<form id='consulta".$consulta['id_consulta']."' action='consulta.php' method='post' style='display:none;'><input type='text' name='idConsulta' value='".$consulta['id_consulta']."'></form>";
 				$consulta = $query->fetch();
 				echo "</div>";
@@ -118,17 +118,16 @@
 		unset($query);
 		}
 
-	function mostrarOpciones($pdo,$id_consulta,$id_user){
+	function mostrarOpciones($pdo,$id_consulta,$id_user,$password){
 		$query = $pdo->prepare("select * FROM Opciones WHERE id_consulta = ".$id_consulta."");
 		$query->execute();
 		$opciones = $query->fetch();
 		//executem la funcio per saber si l'usuari ha votat i la opcion que ha escollit.
-		$voto = mostrarResultados($pdo,$id_consulta,$id_user);
-		
+		$voto = mostrarResultados($pdo,$id_consulta,$id_user,$password);
 
 		//mostrem el resultat obtingut.
 		echo "<div class='opcionesOculto' id='o".$id_consulta."'>
-				<form action='votar.php' method='post'>";
+				<form action='votarNew.php' method='post'>";
 
 		while($opciones){
 			if($id_user == 1){
@@ -159,20 +158,45 @@
 		unset($query);
 	}
 	
-	function mostrarResultados2($pdo,$id_consulta,$id_user){
-		//executem la funcio i retornem la array amb tots els elements.
-		$query = $pdo->prepare("select * FROM VotosUsuario WHERE EXISTS (select * FROM Opciones WHERE id_consulta = ".$id_consulta.") and id_user = ".$id_user."");
+	function mostrarResultados($pdo,$id_consulta,$id_user,$password){
+		//	executem la funcio i retornem la array amb tots els elements.
+		$query = $pdo->prepare("select * FROM VotosUsuario WHERE id_user = ".$id_user."");
 		$query->execute();
-		$opciones = $query->fetch();
+		$votoUsuario = $query->fetch();
 
-		return $opciones;
+		$query = $pdo->prepare("select vu.id_voto, vo id_opcion, o.id_opcion 
+			FROM VotosUsuario vu, VotosOpcion vo, Opciones o 
+			WHERE id_user = ".$id_user." AND vo.id_opcion = o.id_opcion");
+		$query->execute();
+		$voto = $query->fetch();
+		
+		
+		print_r($voto);
+
+		//while($votoUsuario){
+
+			// $query = $pdo->prepare("select id_opcion FROM VotosOpcion WHERE EXISTS (select id_opcion FROM Opciones WHERE id_consulta = ".$id_consulta.") AND hash = AES_DECRYPT('".$votoUsuario['hash_enc']."','".$password."')");
+			// $query->execute();
+			// $voto = $query->fetch();
+
+
+			$query = $pdo->prepare("select vu. id_voto, vo.id_opcion
+									FROM VotosOpcion vo, Opciones o, Consultas c, VotosUsuario vu
+									WHERE o.id_consulta = c.id_consulta and vo.id_opcion = o.id_opcion and o.id_consulta = ".$id_consulta." and vu.id_user = ".$id_user.";
+			");
+			$query->execute();
+			$voto = $query->fetch();
+
+		return $voto;
+
+		
 
 		unset($pdo); 
 		unset($query);
 	}
 
 	//Funcion mostrar vieja
-	function mostrarResultados($pdo,$id_consulta,$id_user){
+	function mostrarResultados2($pdo,$id_consulta,$id_user){
 		//executem la funcio i retornem la array amb tots els elements.
 		$query = $pdo->prepare("select * FROM Votos WHERE EXISTS (select * FROM Opciones WHERE id_consulta = ".$id_consulta.") and id_user = ".$id_user."");
 		$query->execute();
@@ -196,9 +220,10 @@
 	}
 
 	function countResultado($pdo, $id_opcion){
-		$query = $pdo->prepare("SELECT COUNT(id_voto) FROM Votos WHERE id_opcion=".$id_opcion."");
+		$query = $pdo->prepare("SELECT COUNT(id_voto) FROM VotosOpcion WHERE id_opcion=".$id_opcion."");
 		$query->execute();
 		$votos = $query->fetch();
+
 		return $votos['COUNT(id_voto)'];
 	}
 

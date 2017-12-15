@@ -11,7 +11,7 @@
 	include 'funcions.php';
 	$pdo = connectar();
 	
-	mostrarTodasConsultas($pdo,1,false);
+	mostrarResultados($pdo,32,1,'55133c9aa03017a76fd569121c2aea86e981d43a');
 
 ?>
 </body>
