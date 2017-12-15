@@ -66,7 +66,14 @@
 	}
 	
 	function votado($pdo,$consulta,$id_user){
-		$query = $pdo->prepare("select * FROM Opciones WHERE id_consulta = ".$consulta." AND id_opcion = (select vo.id_opcion FROM VotosOpcion vo, VotosUsuario vu WHERE vu.id_user = ".$id_user.")");
+		$query = $pdo->prepare("select * FROM Opciones WHERE id_consulta = ".$consulta." AND id_opcion = (select id_opcion FROM Votos WHERE id_user = ".$id_user.")");
+		$query->execute();
+		//$votado = $query->fetch();
+
+		$query = $pdo->prepare("select *
+								FROM VotosOpcion vo, Opciones o, Consultas c, VotosUsuario vu
+								WHERE o.id_consulta = c.id_consulta and vo.id_opcion = o.id_opcion and o.id_consulta = ".$consulta." and vu.id_user = ".$id_user.";
+		");
 		$query->execute();
 		$votado = $query->fetch();
 		if(count($votado) <= 1){
@@ -160,37 +167,16 @@
 	
 	function mostrarResultados($pdo,$id_consulta,$id_user,$password){
 		//	executem la funcio i retornem la array amb tots els elements.
-		$query = $pdo->prepare("select * FROM VotosUsuario WHERE id_user = ".$id_user."");
-		$query->execute();
-		$votoUsuario = $query->fetch();
-
-		$query = $pdo->prepare("select vu.id_voto, vo id_opcion, o.id_opcion 
-			FROM VotosUsuario vu, VotosOpcion vo, Opciones o 
-			WHERE id_user = ".$id_user." AND vo.id_opcion = o.id_opcion");
+		$query = $pdo->prepare("select vu.id_voto, vo.id_opcion
+								FROM VotosOpcion vo, Opciones o, Consultas c, VotosUsuario vu
+								WHERE o.id_consulta = c.id_consulta and vo.id_opcion = o.id_opcion and o.id_consulta = ".$id_consulta." and vu.id_user = ".$id_user.";
+		");
 		$query->execute();
 		$voto = $query->fetch();
-		
-		
-		print_r($voto);
-
-		//while($votoUsuario){
-
-			// $query = $pdo->prepare("select id_opcion FROM VotosOpcion WHERE EXISTS (select id_opcion FROM Opciones WHERE id_consulta = ".$id_consulta.") AND hash = AES_DECRYPT('".$votoUsuario['hash_enc']."','".$password."')");
-			// $query->execute();
-			// $voto = $query->fetch();
-
-
-			$query = $pdo->prepare("select vu. id_voto, vo.id_opcion
-									FROM VotosOpcion vo, Opciones o, Consultas c, VotosUsuario vu
-									WHERE o.id_consulta = c.id_consulta and vo.id_opcion = o.id_opcion and o.id_consulta = ".$id_consulta." and vu.id_user = ".$id_user.";
-			");
-			$query->execute();
-			$voto = $query->fetch();
 
 		return $voto;
 
-		
-
+		//eliminem els objectes per alliberar memòria 
 		unset($pdo); 
 		unset($query);
 	}
