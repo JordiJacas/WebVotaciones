@@ -20,10 +20,10 @@
 	if ($row){
 		
 		$_SESSION['row'] = $row;
-		header('Location: http://jjacas.tk/~app/WebVotaciones/php/menuPrincipal.php');
+		header('Location: http://localhost/WebVotaciones/php/menuPrincipal.php');
 		
 	}else{
-		header('Location: http://jjacas.tk/~app/WebVotaciones/');
+		header('Location: http://localhost/WebVotaciones/');
 	}
 	
 	//eliminem els objectes per alliberar memòria 
