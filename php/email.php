@@ -16,11 +16,11 @@
 		$numUser = $query->fetch();
 
 		//preparem i executem la consulta
-		if($numUser = 0){
+		if($numUser == 0){
 			$query = $pdo->prepare("INSERT into Usuarios (email,isAdmin,token) values ('".$email[$num]."',0,'".$token."')");
 			$query->execute();
 
-		}else if ($numUser = 1){
+		}else if ($numUser == 1){
 			$query = $pdo->prepare("UPDATE Usuarios set token = '".$token."' WHERE email = '".$email[$num]."'");
 			$query->execute();
 
