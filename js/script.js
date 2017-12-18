@@ -1,9 +1,21 @@
-//Variables Globales
+/*
+** Script.js
+** Creador: Jordi Jacas
+** Archivo donde se alojan todas las funciones de Javascript del Proyecto "Vota"
+*/
+
+/*
+** Variables Globales
+*/
 var numOpciones = 0;
 var isConsultaNull = true;
 var bloquearConsulta = true;
 
-
+/*
+** Funcion que se ejecuta al cargar la pagina "crearConsulta.php"
+** Entrada: NULL
+** Salida: NULL
+*/
 function onload(){
 	//Desabilitar botones de Crear Opcion i Enviar Consulta al cargar la pagina.
 	enableDisable('crearO');
@@ -11,6 +23,11 @@ function onload(){
 	enableDisable('borrarO');
 }
 
+/*
+** Funcion que se ejecuta en el "onclick" del voton "crearO" de "crearConsulta.php"
+** Entrada: NULL
+** Salida: NULL
+*/
 function validarConsulta(){
 	//Obtenemos los elementos.
 	var consulta = document.getElementById('consulta')
@@ -42,10 +59,20 @@ function validarConsulta(){
 	}
 }
 
+/*
+** Funcion que se ejecuta la funcion "validarConsulta" (funcion de arriba) para pintar los recuadros de "crearConsulta.php"
+** Entrada: int id
+** Salida: NULL
+*/
 function pintaRojo (id){
 	document.getElementById(id).style.borderColor = 'red';
 }
 
+/*
+** Funcion que hace la validacion de las fechas introducidas en la pagina "crearConsultas.php"
+** Entrada: Date dFinal, Date dinicial
+** Salida: true // false
+*/
 function validatFecha(dFinal, dInicial){
 	
 	//Obtenemos los elementos.
@@ -100,6 +127,11 @@ function validatFecha(dFinal, dInicial){
 	return false;
 }
 
+/*
+** Funcione que hace la validacion de los campos de la pagina "crearConsulta.php"
+** Entrada: NULL
+** Sallida: true // false
+*/
 function validarOpciones(){
 	
 	//Obtenemos el elemento i creamos una variable para contar los valores no nulos.
@@ -130,16 +162,32 @@ function validarOpciones(){
 	return false;
 }
 
+/*
+** Funcione que le da el atributo del borde en la funcion "crearConsulta" (funcion que esta mas abajo)
+** Entrada: String this
+** Sallida: NULL
+*/
 function colorLleno(b) {
     b.style.borderColor = "";
 
 }
+
+/*
+** Funcione que le da el atributo del borde en la funcion "crearConsulta" (funcion que esta mas abajo)
+** Entrada: String this
+** Sallida: NULL
+*/
 function colorVacio(b) {
 	if(b.value == ""){
     	b.style.borderColor = "red";
 	}
 }
 
+/*
+** Funcione se ejecuta al clickar el boton de "crearConsulta" en la pagina "crearConsulta.php"
+** Entrada: NULL
+** Sallida: NULL
+*/
 function crearConsulta(){
 	
 	//Creamos el label y el texto que tendra.	
@@ -267,6 +315,11 @@ function crearConsulta(){
 
 }
 
+/*
+** Funcion que se ejecuta para habilitar o deshabilitar elementos
+** Entrada: int id
+** Sallida: NULL
+*/
 function enableDisable(id){
 	
 	btn = document.getElementById(id);
@@ -280,6 +333,11 @@ function enableDisable(id){
 	}
 }
 
+/*
+** Funcion que crea la opcion en la pagina "crearConsulta.php" y se ejecuta en la funcion "validarConsulta" (funcion arriba del todo)
+** Entrada: NULL
+** Salida: NULL
+*/
 function crearOpcion(){
 	//Sumamos uno a la variable global siempre que se ejecute la funcion.
 	numOpciones++;
@@ -338,6 +396,11 @@ function crearOpcion(){
  	document.body.getElementsByTagName("form")[0].insertBefore(br,lugar);
 }
 
+/*
+** Funcion que se ejecuta al clickar en el boton "Enviar consulta" de la pagina "crearConsulta.php"
+** Entrada: NULL
+** Salida: NULL
+*/
 function eSubmit(){
 	
 	//Comprovamos que todos los campos estan conrrectos.
@@ -360,6 +423,11 @@ function eSubmit(){
 	
 }
 
+/*
+** Funcion que borra la opcion, tambien en la funcion "crearOpcion" y le da la propiedad al boton (arriba) 
+** Entrada: int id
+** Salida: NULL
+*/
 function borrarOpcion(id){
 	//Variable inicial.
 	var numId = 1;
@@ -412,10 +480,13 @@ function borrarOpcion(id){
 		
 		numId++
 	}
-	
-
 }
 
+/*
+** Funcion que permite subir opciones un puesto para arriba
+** Entrada: int id
+** Salida: NULL
+*/
 function subirOpcion(id){
 	//Variable inicial.
 	var nuevaPos = id - 1;
@@ -436,6 +507,11 @@ function subirOpcion(id){
 	}
 }
 
+/*
+** Funcion que permite bajar de puesto una opcion
+** Entrada: int id
+** Salida: NULL
+*/
 function bajarOpcion(id){
 	//Variable inicial.
 	var nuevaPos = id + 1;
@@ -456,6 +532,11 @@ function bajarOpcion(id){
 
 }
 
+/*
+** Funcion que permite borrar todas las opciones creadas para la consulta
+** Entrada: NULL
+** Salida: NULL
+*/
 function borrarTodasOpciones(){
 	
 	//Obtenemos los elementos con su id.
@@ -479,10 +560,13 @@ function borrarTodasOpciones(){
 	
 	//Pone la variable a su valor inicial.
 	numOpciones = 0;
-
 }
 
-
+/*
+** Funcion que envia el formulario y crea en el boton "enviar" de la funcion "crearConsulta" (arriba)
+** Entrada: NULL
+** Salida: true // false
+*/
 function enviar(){
 	//Variables para los elementos.
 	var formulario = document.getElementById("myform");	
@@ -498,6 +582,11 @@ function enviar(){
 	}
 }
 
+/*
+** 
+** 
+** 
+*/
 function mostrar(elemento){
 	//Obtenomos el id del elemento seleccionado.
 	var numId = elemento.id;
