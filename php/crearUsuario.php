@@ -23,7 +23,7 @@
 
 
 	if(count($comprovar)>1){
-		if($comprovar['nombre'] == null && $comprovar['apellido']==  && $comprovar['isAdmin'] == 0){
+		if($comprovar['nombre'] == null && $comprovar['apellido']== null && $comprovar['isAdmin'] == 0){
 
 			$query = $pdo->prepare("UPDATE Usuarios SET nombre='".$nombre."', apellido='".$apellido."', password=sha1('".$password."'), token = null WHERE token = '".$token."' AND email = '".$email."'");
 
@@ -43,10 +43,6 @@
 		}
 	}else if(count($comprovar)<=1){
 		
-		$email = $_POST['email'];
-		$nombre = $_POST['nombre'];
-		$apellido = $_POST['apellido'];
-		$password = $_POST['password'];
 		//preparem i executem la consulta
 		$query = $pdo->prepare("INSERT INTO `Usuarios`(`nombre`, `apellido`, `email`, `password`) VALUES ('".$nombre."', '".$apellido."', '".$email."', sha1('".$password."'));");
 
@@ -67,6 +63,4 @@
 	//eliminem els objectes per alliberar memòria 
 	unset($pdo); 
 	unset($query)
-
-	header('Location: http://jjacas.tk/~app/WebVotaciones/');
 ?>
