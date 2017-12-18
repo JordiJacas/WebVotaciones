@@ -23,7 +23,7 @@
 
 
 	if(count($comprovar)>1){
-		if($comprovar['nombre'] == null && $comprovar['apellido']== null && $comprovar['isAdmin'] == 1){
+		if($comprovar['nombre'] == null && $comprovar['apellido']==  && $comprovar['isAdmin'] == 0){
 
 			$query = $pdo->prepare("UPDATE Usuarios SET nombre='".$nombre."', apellido='".$apellido."', password=sha1('".$password."'), token = null WHERE token = '".$token."' AND email = '".$email."'");
 
