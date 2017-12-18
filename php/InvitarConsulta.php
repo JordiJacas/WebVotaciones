@@ -2,7 +2,7 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="../css/styleNav.css">
-	<link rel="stylesheet" type="text/css" href="../css/styleMenuPrincipal.css">
+	<link rel="stylesheet" type="text/css" href="../css/styleInvitar.css">
 	<script type="text/javascript" src="../js/script.js"></script>
 	<meta charset="utf-8">
 	<title>Web Votaciones</title>
@@ -16,7 +16,7 @@
 	
 	$row = $_SESSION['row'];
 ?>
-<!-- 	<nav>
+	<nav>
 		<img src="../img/logo.png" id="logo">
 		<ul>
 			<li><a href="menuPrincipal.php" >Inicio</a></li>
@@ -29,16 +29,20 @@
 		</ul>
 		<p><?php echo $row['nombre'] . " " . $row['apellido']; ?></p>
 		<a id = "lLogout" href = "logout.php"><img id = "logout"  src="../img/Logout.png"></a>
-	</nav> -->
+	</nav>
 	<section>
-		<form action='email.php' method='post'>
-				<label>Emails: </label>
-				<textarea name='email'></textarea>
-				<br>
-				<input type='submit' value='invitar'>
+		<form id = "form" action='email.php' method='post'>
+				<label>Consulta: </label>
 				<select name='idConsulta'>
 					<?php invitarSelect($pdo,$row['id_user']);?>
 				<select>
+				<br>
+				<label>Emails: </label>
+				<br>
+				<textarea name='email'></textarea>
+				<br>
+				<input type='submit' value='Invitar'>
+				
 		</form>
 	<section>	
 

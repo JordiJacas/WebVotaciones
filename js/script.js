@@ -513,19 +513,12 @@ function mostrar(elemento){
 	}
 }
 
-function mostrarOpciones(elemento){
-	//Obtenomos el id del elemento seleccionado.
-	var numId = elemento.id;
+function mostrarOpciones(){
 	//Obtenemos la classe que tiene el elemento.
-	var nombreClasse = document.getElementById('o'+ numId).className
+	var consulta = document.getElementsByClassName('opcionesOculto');
 	
-	//Cambiamos de classe segun la que tenga en este momento.
-	if(nombreClasse == 'opcionesOculto'){
-		document.getElementById('o'+ numId).className = 'opcionesVisible';
+	consulta[0].className = 'opcionesVisible';
 		
-	}else if(nombreClasse == 'opcionesVisible'){
-		document.getElementById('o'+ numId).className = 'opcionesOculto';
-	}
 }
 
 function mostrarConsultaSel(elem){
