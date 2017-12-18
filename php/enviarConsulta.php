@@ -33,5 +33,5 @@
 	unset($pdo); 
 	unset($query);
 
-	header('Location: http://localhost/WebVotaciones/php/menuPrincipal.php');
+	header('Location: http://jjacas.tk/~app/WebVotaciones/php/menuPrincipal.php');
 ?>
