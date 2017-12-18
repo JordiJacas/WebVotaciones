@@ -11,13 +11,13 @@
 	for($num = 0; $num <count($email); $num++){
 		$token = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());
 
-		$query = $pdo->prepare("SELECT count(id_user) FROM Usuarios WHERE email = 'jjacas@es.com'");
+		$query = $pdo->prepare("SELECT count(id_user) FROM Usuarios WHERE email = '".$email[$num]."'");
 		$query->execute();
 		$numUser = $query->fetch();
 
 		//preparem i executem la consulta
 		if($numUser = 0){
-			$query = $pdo->prepare("INSERT into Usuarios (email,isAdmin,token) values ('jjacas@es.com',0,'abcd234')");
+			$query = $pdo->prepare("INSERT into Usuarios (email,isAdmin,token) values ('".$email[$num]."',0,'".$token."')");
 			$query->execute();
 
 		}else if ($numUser = 1){
