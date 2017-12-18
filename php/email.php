@@ -46,5 +46,5 @@
 		mail($email[$num], $titulo, $mensaje);
 	}
 
-	//header('Location: http://jjacas.tk/~app/WebVotaciones/php/menuPrincipal.php');
+	header('Location: http://jjacas.tk/~app/WebVotaciones/php/menuPrincipal.php');
 ?>
