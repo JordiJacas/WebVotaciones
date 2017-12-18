@@ -10,7 +10,6 @@
 <?php
 	include 'funcions.php';
 	$pdo = connectar();
-	mostraUsuarios($pdo);
 
 	if(isset($_GET['token'])){
 		$token = $_GET['token'];
