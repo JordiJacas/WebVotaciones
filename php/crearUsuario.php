@@ -33,10 +33,10 @@
 			if ($row){
 				
 				$_SESSION['row'] = $row;
-				//header('Location: http://localhost/WebVotaciones/php/menuPrincipal.php');
+				header('Location: http://jjacas.tk/~app/WebVotaciones/php/menuPrincipal.php');
 				
 			}else{
-				//header('Location: http://localhost/WebVotaciones');
+				header('Location: http://jjacas.tk/~app/WebVotaciones/');
 			}
 		}else{
 			echo "<script>alert('El correo ya existe')</script>";
@@ -57,10 +57,10 @@
 		if ($row){
 			
 			$_SESSION['row'] = $row;
-			//header('Location: http://localhost/WebVotaciones/php/menuPrincipal.php');
+			header('Location: http://jjacas.tk/~app/WebVotaciones/php/menuPrincipal.php');
 			
 		}else{
-			//header('Location: http://localhost/WebVotaciones');
+			header('Location: http://jjacas.tk/~app/WebVotaciones/');
 		}
 	}
 	
