@@ -526,3 +526,4 @@ function mostrarConsultaSel(elem){
 	var formConsulta = document.getElementById(idConsulta);
 	formConsulta.submit();
 }
+
