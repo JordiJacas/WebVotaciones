@@ -9,7 +9,7 @@
 
 	$email = explode("\n", $email);
 
-	//for($num = 0; $num <count($email); $num++){
+	for($num = 0; $num <count($email); $num++){
 		$token = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());
 
 		$query = $pdo->prepare("SELECT count(id_user) FROM Usuarios WHERE email = 'jjacas@es.com'");
@@ -35,6 +35,8 @@
 		$usuario = $query->fetch();
 		
 		$mensaje = "http://localhost/WebVotaciones/?token=".$token;
-		//mail($email[num], $titulo, $mensaje);
-	//}
+		mail($email[num], $titulo, $mensaje);
+	}
+
+	header('Location: http://jjacas.tk/~app/WebVotaciones/php/menuPrincipal.php');
 ?>
