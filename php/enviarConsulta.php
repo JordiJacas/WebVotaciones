@@ -13,9 +13,6 @@
 	//preparem i executem la consulta
 	$query = $pdo->prepare("insert into Consultas (descripcion, id_admin, fechaInicial, fechaFinal) values ('".$consulta."',".$row['id_user'].",'".$fechaInicial."','".$fechaFinal."')");
 	$query->execute();
-
-	$query = $pdo->prepare("insert into Invitaciones (descripcion, id_admin) values (',".$row['id_user'].")");
-	$query->execute();
 	
 	$query = $pdo->prepare("select id_consulta from Consultas where descripcion = '".$consulta."'");
 	$query->execute();
