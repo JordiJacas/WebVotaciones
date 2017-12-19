@@ -229,7 +229,7 @@ function crearConsulta(){
 	
 	//Creamos el input de la fecha inicial y le añadimos atributos(horas).
 	var inputHoraInici = document.createElement("input");
-	inputHoraInici.setAttribute('name','fechaInicial');
+	inputHoraInici.setAttribute('name','horaInicial');
 	inputHoraInici.setAttribute('class','fecha');
 	inputHoraInici.setAttribute('id','horaInicial');
 	inputHoraInici.setAttribute('type','time');
@@ -257,7 +257,7 @@ function crearConsulta(){
 	
 	//Creamos el input de la fecha final y le añadimos atributos(horas).
 	var inputHoraFinal = document.createElement("input");
-	inputHoraFinal.setAttribute('name','fechaInicial');
+	inputHoraFinal.setAttribute('name','horaInicial');
 	inputHoraFinal.setAttribute('class','fecha');
 	inputHoraFinal.setAttribute('id','horaFinal');
 	inputHoraFinal.setAttribute('type','time');
