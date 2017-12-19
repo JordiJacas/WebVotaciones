@@ -40,6 +40,7 @@
 			}
 		}else{
 			echo "<script>alert('El correo ya existe')</script>";
+			header('Location: http://jjacas.tk/~app/WebVotaciones/php/menuPrincipal.php');
 		}
 	}else if(count($comprovar)<=1){
 		
