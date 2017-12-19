@@ -169,7 +169,7 @@
 		//	executem la funcio i retornem la array amb tots els elements.
 		$query = $pdo->prepare("select vu.id_voto, vo.id_opcion
 								FROM VotosOpcion vo, Opciones o, Consultas c, VotosUsuario vu
-								WHERE o.id_consulta = c.id_consulta and vo.id_opcion = o.id_opcion and o.id_consulta = ".$id_consulta." and vu.id_user = ".$id_user." and AES_DECRYPT('vu.hash_enc') = vo.hash;
+								WHERE o.id_consulta = c.id_consulta and vo.id_opcion = o.id_opcion and o.id_consulta = ".$id_consulta." and vu.id_user = ".$id_user.";
 		");
 		$query->execute();
 		$voto = $query->fetch();
