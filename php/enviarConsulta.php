@@ -17,6 +17,7 @@
 	$query = $pdo->prepare("select id_consulta from Consultas where descripcion = '".$consulta."'");
 	$query->execute();
 	$dades = $query->fetch();
+	$dades = $query->fetch();
 
 	$query = $pdo->prepare("insert into Invitaciones (descripcion, id_admin) values (".$dades['id_consulta'].",".$row['id_user'].")");
 	$query->execute();
