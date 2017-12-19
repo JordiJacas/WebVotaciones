@@ -581,27 +581,11 @@ function enviar(){
 		return false;
 	}
 }
-
 /*
-** 
-** 
-** 
+** Funcion que muestra las opciones en la pagina "consulta.php"
+** Entrada: NULL
+** Salida: NULL
 */
-function mostrar(elemento){
-	//Obtenomos el id del elemento seleccionado.
-	var numId = elemento.id;
-	//Obtenemos la classe que tiene el elemento.
-	var nombreClasse = document.getElementById('o'+ numId).className
-	
-	//Cambiamos de classe segun la que tenga en este momento.
-	if(nombreClasse == 'opcionesOculto'){
-		document.getElementById('o'+ numId).className = 'opcionesVisible';
-		
-	}else if(nombreClasse == 'opcionesVisible'){
-		document.getElementById('o'+ numId).className = 'opcionesOculto';
-	}
-}
-
 function mostrarOpciones(){
 	//Obtenemos la classe que tiene el elemento.
 	var consulta = document.getElementsByClassName('opcionesOculto');
@@ -610,6 +594,11 @@ function mostrarOpciones(){
 		
 }
 
+/*
+** Funcion que muestra la consulta elgida y se usa en "funciones.php"
+** Entrada: String elem
+** Salida: NULL
+*/
 function mostrarConsultaSel(elem){
 	var idConsulta = "consulta"+elem.id;
 	var formConsulta = document.getElementById(idConsulta);
