@@ -181,19 +181,6 @@
 		unset($query);
 	}
 
-	//Funcion mostrar vieja
-	function mostrarResultados2($pdo,$id_consulta,$id_user){
-		//executem la funcio i retornem la array amb tots els elements.
-		$query = $pdo->prepare("select * FROM Votos WHERE EXISTS (select * FROM Opciones WHERE id_consulta = ".$id_consulta.") and id_user = ".$id_user."");
-		$query->execute();
-		$opciones = $query->fetch();
-
-		return $opciones;
-
-		unset($pdo); 
-		unset($query);
-	}
-
 	function todosUsuarios($pdo,$id_user){
 		$query = $pdo->prepare("select * FROM Usuarios Where id_user != ".$id_user."");
 		$query->execute();
